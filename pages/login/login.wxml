@@ -1,0 +1,29 @@
+<!--pages/login.wxml-->
+<view class='page-body' style='background-image:url({{bgImg}})'>
+  <view class='bg'>
+  </view>
+  <view class='content'>
+    <!-- <view class='login'>
+      <text class='title'>登录</text>
+      <view class='input-box'>
+        <text>>+86</text>
+        <input type='text' class='input' value='{{phoneNumber}}' placeholder='请输入手机号码'></input>
+      </view>
+      <button class='next'>下一步</button>
+    </view>    -->
+    <view class='inpu-password'>
+      <text class='title'>输入密码</text>
+      <view class='input-box-of-password'>
+        <input type='text' class='input' value='{{inputPassword}}'></input>
+      </view>
+      <view class='input-box-of-password password-box'>
+        <input type='text' class='input' value='{{password}}' placeholder='请输入密码'></input>
+      </view> 
+      <button class='forget-password'>忘记密码</button>
+      <button class='next'>登录</button>
+    </view>    
+    <!-- <view class='verification-code'>
+      <text class='title'>输入验证码</text>
+    </view> -->
+  </view>
+</view>
