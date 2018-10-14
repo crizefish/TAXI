@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/takeover/takeover",
     "pages/waitting/waitting",
     "pages/index/index",
     "pages/express/express",
