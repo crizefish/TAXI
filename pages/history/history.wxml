@@ -1,0 +1,63 @@
+<view class='page-body'>
+  <!--标题  -->
+  <view class='container-box'>
+    <view class='order-title'>
+       <text class='order-title-text'>我的订单</text>
+    </view>
+  </view>
+  <!--订单内容  -->
+  <view class='order-content'>
+  <!--快车订单详情  -->
+    <view class='order-detail'>
+      <view class='order-detail-text01'>
+        <text class='order-detail-text01-01'>快车</text>
+        <text class='order-detail-text01-02'>已完成 ></text>
+      </view>
+      <view class='order-detail-text02'>
+         <image class='order-detail-text02-timer' src='{{timerImg}}'></image>
+         <text class='order-detail-text02-02'> 上周日 10:24</text>
+      </view>
+      <view class='order-detail-text03'>
+         <view class="order-detail-text03-circle"></view> 
+         <text class='order-detail-text03-02'>北京市区大食堂路北京理工大...</text>
+      </view>
+       <view class='order-detail-text03'>
+         <view class="order-detail-text04-circle" ></view> 
+         <text class='order-detail-text03-02'>北京市通州区北斗星商业园区</text>
+      </view>
+    </view>
+
+  <!--平车订单详情  -->
+    <view class='order-detail'>
+      <view class='order-detail-text01'>
+        <text class='order-detail-text01-01'>拼车</text>
+        <text class='order-detail-text01-02'>已完成 ></text>
+      </view>
+    
+      <view class='order-detail-text02'>
+         <image class='order-detail-text02-timer' src='{{timerImg}}'></image>
+         <text class='order-detail-text02-02'> 上周日 10:24</text>
+      </view>
+      <view class='order-detail-text02'>
+         <image class='order-detail-text02-aim' src='{{aimImg}}'></image>
+         <text class='order-detail-text02-02'> 天津市桃城村支部北大门</text>
+      </view>
+      <view class='order-detail-text03'>
+         <view class="order-detail-text03-circle"></view> 
+         <text class='order-detail-text03-02'>北京市区大食堂路北京理工大...</text>
+      </view>
+       <view class='order-detail-text03'>
+         <view class="order-detail-text04-circle" ></view> 
+         <text class='order-detail-text03-02'>北京市通州区北斗星商业园区</text>
+      </view>
+    </view>
+
+    <view class='end-text'>
+      没有更多的订单了
+    </view>
+    
+
+   </view>
+    
+
+</view>

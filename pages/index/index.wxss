@@ -1,0 +1,224 @@
+.page-body{
+  position: fixed; 
+  height: 100%; 
+  width: 100%; 
+  display:flex; 
+  flex-direction: column;
+}
+
+.img-box{
+  padding-left: 15rpx;
+  padding-right: 15rpx;
+  box-sizing: border-box;
+}
+
+.img-user{
+  width: 40rpx;
+  height: 37rpx;
+  margin-left: 8rpx;
+}
+
+.type-of-car{
+  height: 119rpx;
+  display: flex;
+  justify-content: space-around;
+  padding-left: 110rpx;
+  padding-right: 110rpx;
+  padding-bottom: 34rpx;
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.car-text{
+  background: none;
+  font-size: 14pt;
+}
+
+.car-text::after{
+  border: none;
+}
+
+.express{
+  color:#fd9151;
+}
+
+/* 快车 */
+.box-of-express{
+  position: fixed;
+  bottom: 26rpx;
+  width: 100%;
+  border-radius:5px;
+  height: 30rpx; 
+  box-shadow: 10px 10px 5px #888;
+}
+
+.choice-box{
+  width: 100%;
+  display: flex;
+  position: absolute;
+  bottom: 26px;
+  padding-left: 15rpx;
+  padding-right: 15rpx;
+  box-sizing: border-box;
+}
+
+.content{
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  background: #fff;
+  box-sizing: border-box;
+  width: 100%;
+  padding-top: 28rpx;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.now{
+  line-height: 60rpx;
+  font-size: 12pt;
+  width: 112rpx;
+  height: 60rpx;
+  border: 1px solid #dbdbdb;
+  border-radius: 25px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 60rpx;
+  align-self: center;
+}
+
+.input-box{
+  padding-left: 35rpx;
+  box-sizing: border-box;
+}
+
+.top-box{
+  display: flex;
+  flex-direction: row;
+  padding-right: 28rpx;
+}
+
+.circle{
+  display: block;
+  content: '';
+  width:14rpx;
+  height: 14rpx;
+  border-radius: 50%;
+  margin-right: 30rpx;
+  margin-top: 8rpx;
+}
+
+.green-circle{
+  background: #36bd7a;
+}
+
+.orange-circle{
+  background: #ff8903;
+}
+
+.now-position{
+  color: #464646;
+  transform: translateY(-5rpx);
+  padding-bottom: 44rpx;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+  font-size:13pt;
+}
+
+.bottom-box{
+  padding-top: 40rpx;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.bottom-box .now-position{
+  border-bottom: 0 none;
+  padding-bottom: 34rpx;
+}
+
+.chat{
+  width: 320rpx;
+  height: 76rpx;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  left: 270rpx;
+  top: 22rpx;
+  padding-left: 48rpx;
+  box-sizing: border-box;
+  font-size: 11pt;
+  color: #fff;
+  line-height: 76rpx;
+}
+
+icon{
+  transform: translateY(10rpx);
+  margin-left: 6rpx;
+}
+
+.aim{
+  width: 94rpx;
+  height: 94rpx;
+}
+
+.aim-box{
+  position: absolute;
+  right: 13rpx;
+  top: -92rpx;
+}
+
+.enlargemen-and-reduction-box{
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 50%;
+  color: #505050;
+  border: 1px solid #dde1e4;
+  position: absolute;
+  right: 13rpx;
+  top:-462rpx;
+  background: #fff;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  padding-top: 10rpx;
+  box-sizing: border-box;
+  box-shadow:  0 0 1px rgba(0, 0, 0, 0.1)
+}
+
+.oprate{
+  align-self: center;
+  line-height: 36rpx;
+}
+
+.add{
+  font-size: 22pt;
+}
+
+
+.path-of-car{
+  width: 62rpx;
+  height: 116rpx;
+  position: absolute;
+  top: -180rpx;
+  left: 40rpx;
+}
+
+.get-on-the-car-img{
+  width: 204rpx;
+  height: 90rpx;
+  position: absolute;
+  top: -280rpx;
+  left: 140rpx;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-size: 9pt;
+  display: flex;
+  line-height: 78rpx;
+  justify-content: center;
+}
+
+.time-wait{
+  color: #fe7201;
+  padding-right: 6rpx;
+}

@@ -1,0 +1,111 @@
+.page-body{
+  position: fixed; 
+  height: 100%; 
+  width: 100%; 
+  display:flex; 
+  flex-direction: column;
+  background-color: #f3f4f6;
+}
+
+.container-box{
+  box-sizing: border-box;
+}
+
+.order-title{
+  height: 80rpx;
+  color: #b4b4b6;
+  vertical-align:middle;
+  display: table-cell;
+  font-size: 13pt;
+}
+.order-title-text{
+  padding-left: 30rpx;
+}
+
+.order-content{
+  display:flex; 
+  flex-direction: column;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+}
+.order-detail{
+  background-color: #ffffff;
+  border-radius:8rpx 8rpx 8rpx 8rpx;
+  font-size:35rpx;
+  margin-bottom: 50rpx;
+  padding-bottom: 20rpx
+}
+
+.order-detail-text01{
+  padding-top: 30rpx;
+  height: 70rpx;
+  display: flex;
+  justify-content: space-around;
+  box-sizing: border-box;
+}
+
+.order-detail-text01-02{
+  padding-left: 300rpx;
+  color: #b4b4b6
+}
+
+.order-detail-text02{
+  display: flex;
+  flex-direction: row;
+  align-content: flex-start;
+  color: #b4b4b6;
+  padding-top: 25rpx
+}
+.order-detail-text02-timer{
+  padding-left: 50rpx;
+  padding-right: 25rpx;
+  padding-top: 10rpx;
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.order-detail-text02-aim{
+padding-left: 45rpx;
+padding-right: 25rpx;
+padding-top: 10rpx;
+width: 50rpx;
+height: 50rpx;
+}
+
+.order-detail-text03{
+  padding-top: 18rpx;
+  display: flex;
+  flex-direction: row;
+  align-content: flex-start;
+  color: #b4b4b6;
+}
+.order-detail-text03-circle{
+  width: 10px;      
+  height: 10px;      
+  background-color:#61bc83;      
+  border-radius: 50%;      
+  -moz-border-radius: 50%;      
+  -webkit-border-radius: 50%;
+  margin-left: 55rpx;
+  margin-top: 18rpx;
+  margin-right: 40rpx
+
+}
+
+.order-detail-text04-circle{
+   width: 10px;      
+  height: 10px;      
+  background-color:#f3903b;      
+  border-radius: 50%;      
+  -moz-border-radius: 50%;      
+  -webkit-border-radius: 50%;
+  margin-left: 55rpx;
+  margin-top: 18rpx;
+  margin-right: 40rpx
+}
+.end-text{
+   color: #b4b4b6;
+   text-align: center;  
+   padding-top: 200rpx;
+   font-size:12pt;
+}
