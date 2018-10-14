@@ -2,60 +2,34 @@
 //获取应用实例
 const app = getApp()
 
+// 引用百度地图微信小程序JSAPI模块 
+var bmap = require('../../libs/bmap-wx.min.js');
+var wxMarkerData = [];
+
 Page({
   data: {
-    nowPosition:'您当前所在的位置',
-    destination:'', // 目的地
+    markers: [],
+    latitude: '',
+    longitude: '',
+    rgcData: {},
+    nowPosition: '您当前所在的位置',
+    destination: '', // 目的地
     whereAreUGoing: '北京天安门',
-    timeWait:'几分钟后',
+    timeWait: '2分钟后',
     pathOfCar: app.globalData.GlobalIMG + 'alc@2x.png',
     aim: app.globalData.GlobalIMG + 'sy_dingwei@2x.png',
     getOnTheCar: app.globalData.GlobalIMG + 'sy_tixing@2x.png',
     chatImg: app.globalData.GlobalIMG + 'sy_tishi@2x.png',
-    markers: [{
-      iconPath: app.globalData.GlobalIMG + 'sy_qidian@2x.png',
-      id: 0,
-      latitude: 23.099994,
-      longitude: 113.324520,
-      width: 50,
-      height: 50
-    }],
-    polyline: [{
-      points: [{
-        longitude: 113.3245211,
-        latitude: 23.10229
-      }, {
-        longitude: 113.324520,
-        latitude: 23.21229
-      }],
-      color: "#FF0000DD",
-      width: 2,
-      dottedLine: true
-    }],
-    controls: [{
-      id: 1,
-      iconPath: app.globalData.GlobalIMG +'alc@3x.png',
-      position: {
-        left: 0,
-        top: 300 - 50,
-        width: 50,
-        height: 50
-      },
-      clickable: true
-    }],
-
-
     btn_user2x: app.globalData.GlobalIMG + "btn_user@2x.png",
     motto: '888',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
+  makertap: function (e) {
+    var that = this;
+    var id = e.markerId;
+    that.showSearchInfo(wxMarkerData, id);
   },
   onLoad: function () {
     if (app.globalData.userInfo) {
@@ -63,7 +37,7 @@ Page({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
-    } else if (this.data.canIUse){
+    } else if (this.data.canIUse) {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
@@ -84,8 +58,53 @@ Page({
         }
       })
     }
+
+
+    var that = this;
+    var BMap = new bmap.BMapWX({
+      ak: '9nxZMWueKmnnnGgrt6Ie7fR3EdjYTD6N'
+    });
+    var fail = function (data) {
+      console.log(data)
+    };
+    var success = function (data) {
+      wxMarkerData = data.wxMarkerData;
+      that.setData({
+        markers: wxMarkerData
+      });
+      that.setData({
+        latitude: wxMarkerData[0].latitude
+      });
+      that.setData({
+        longitude: wxMarkerData[0].longitude
+      });
+    }
+    BMap.regeocoding({
+      fail: fail,
+      success: success,
+      // iconPath: '../../img/marker_red.png',
+      // iconTapPath: '../../img/marker_red.png'
+    });
   },
-  getUserInfo: function(e) {
+  showSearchInfo: function (data, i) {
+    var that = this;
+    that.setData({
+      rgcData: {
+        address: '地址：' + data[i].address + '\n',
+        desc: '描述：' + data[i].desc + '\n',
+        business: '商圈：' + data[i].business
+      }
+    });
+  },
+
+  //事件处理函数
+  bindViewTap: function () {
+    wx.navigateTo({
+      url: '../logs/logs'
+    })
+  },
+
+  getUserInfo: function (e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({

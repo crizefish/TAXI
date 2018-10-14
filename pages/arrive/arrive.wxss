@@ -44,7 +44,7 @@ icon{
 }
 
 .get-on-the-car-img{
-  width: 290rpx;
+  width: 470rpx;
   background: #fff;
   border-radius: 40rpx;
   position: absolute;
@@ -100,6 +100,7 @@ icon{
 
 .text{
   font-size: 10pt;
+  align-self: center;
 }
 
 .driver-message{

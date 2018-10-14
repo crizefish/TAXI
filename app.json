@@ -1,8 +1,10 @@
 {
   "pages": [
+    "pages/index/index",
+    "pages/arrive/arrive",
     "pages/takeover/takeover",
     "pages/waitting/waitting",
-    "pages/index/index",
+    
     "pages/express/express",
     "pages/history/history",
     "pages/logs/logs"
