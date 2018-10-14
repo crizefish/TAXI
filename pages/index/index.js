@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
-const app = getApp()
+const app = getApp();
+
 
 // 引用百度地图微信小程序JSAPI模块 
 var bmap = require('../../libs/bmap-wx.min.js');
@@ -26,11 +27,54 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
+
+  // 绑定input输入 
+  bindKeyInput: function (e) {
+    whereAreUGoing: '422';
+    var that = this;
+    // 新建百度地图对象 
+    var BMap = new bmap.BMapWX({
+      ak: '9nxZMWueKmnnnGgrt6Ie7fR3EdjYTD6N'
+    });
+    var fail = function (data) {
+      console.log(data)
+    };
+    var success = function (data) {
+      var sugData = '';
+      for (var i = 0; i < data.result.length; i++) {
+        sugData = sugData + data.result[i].name + '\n';
+      }
+      that.setData({
+        sugData: sugData
+      });
+    }
+    // 发起suggestion检索请求 
+    BMap.suggestion({
+      query: e.detail.value,
+      region: '北京',
+      city_limit: true,
+      fail: fail,
+      success: success
+    });
+  } ,
+
   makertap: function (e) {
     var that = this;
     var id = e.markerId;
     that.showSearchInfo(wxMarkerData, id);
   },
+
+  showSearchInfo: function (data, i) {
+    var that = this;
+    that.setData({
+      rgcData: {
+        address: '地址：' + data[i].address + '\n',
+        desc: '描述：' + data[i].desc + '\n',
+        business: '商圈：' + data[i].business
+      }
+    });
+  },
+
   onLoad: function () {
     if (app.globalData.userInfo) {
       this.setData({
@@ -69,6 +113,7 @@ Page({
     };
     var success = function (data) {
       wxMarkerData = data.wxMarkerData;
+      console.log(data.wxMarkerData)
       that.setData({
         markers: wxMarkerData
       });
@@ -78,6 +123,9 @@ Page({
       that.setData({
         longitude: wxMarkerData[0].longitude
       });
+      console.log( wxMarkerData[0].latitude
+     
+      )
     }
     BMap.regeocoding({
       fail: fail,
@@ -86,16 +134,7 @@ Page({
       // iconTapPath: '../../img/marker_red.png'
     });
   },
-  showSearchInfo: function (data, i) {
-    var that = this;
-    that.setData({
-      rgcData: {
-        address: '地址：' + data[i].address + '\n',
-        desc: '描述：' + data[i].desc + '\n',
-        business: '商圈：' + data[i].business
-      }
-    });
-  },
+
 
   //事件处理函数
   bindViewTap: function () {
@@ -112,4 +151,7 @@ Page({
       hasUserInfo: true
     })
   }
+
+
+
 })
