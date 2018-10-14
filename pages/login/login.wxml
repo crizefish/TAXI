@@ -3,14 +3,16 @@
   <view class='bg'>
   </view>
   <view class='content'>
-    <!-- <view class='login'>
+     <view class='login'>
       <text class='title'>登录</text>
       <view class='input-box'>
         <text>>+86</text>
-        <input type='text' class='input' value='{{phoneNumber}}' placeholder='请输入手机号码'></input>
+        <input type='text' bindinput='phoneNumberInput' class='input' value='{{phoneNumber}}' placeholder='请输入手机号码'></input>
       </view>
-      <button class='next'>下一步</button>
-    </view>    -->
+      <button class='next' bindtap='checkLoginStatus'>下一步</button>
+    </view>   
+
+
     <!-- <view class='inpu-password'>
       <text class='title'>输入密码</text>
       <view class='input-box-of-password'>
@@ -36,7 +38,9 @@
         <input class='square' type='text'  wx:for="{{6}}"></input>
       </view>
     </view>  -->
-    <view class='inpu-password set-password-box'>
+
+    <!-- 设置密码 -->
+    <!-- <view class='inpu-password set-password-box'>
       <text class='title'>设置登录密码</text>
       <view class='input-box-of-password'>
         <input type='text' class='input' value='{{setPassword}}' placeholder='请输入6-16位密码'></input>
@@ -45,6 +49,6 @@
         须包含数字、字母、符号中至少两种元素
       </text> 
       <button class='next'>确 认</button>
-    </view> 
+    </view>  -->
   </view>
 </view>

@@ -14,12 +14,15 @@
         <view class='input-box'>
           <view class='top-box'>
             <view class='circle green-circle'></view>
-            <input type='text' class='now-position' value='{{nowPosition}}'></input>
+            <input type='text' class='now-position' value='{{markers[0].address}}'></input>
           </view>
           <view class='top-box bottom-box'>
             <view class='circle orange-circle'></view>
-            <input type='text' class='now-position' placeholder='您要去哪儿' value='{{destination}}'></input>
-            <view class='chat' style='background-image:url({{chatImg}})'>
+            <input auto-focus type="text" bindinput="bindKeyInput" class='now-position' placeholder='您要去哪儿' value='{{destination}}'></input>
+            <view class="sug_info"> 
+                  <text>{{sugData}}</text> 
+            </view>
+            <view class='chat' style='background-image:url({{chatImg}});display:{{chatShow}}'>
               去：{{whereAreUGoing}} 
               <icon type="clear" size="20"/>
             </view>

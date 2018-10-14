@@ -1,5 +1,6 @@
 // pages/login.js
-const app = getApp()
+const app = getApp();
+var ls = require('../../service/loginService.js');
 Page({
   /**
    * 页面的初始数据
@@ -68,5 +69,19 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+
+  phoneNumberInput: function (e) {
+    this.setData({
+      phoneNumber: e.detail.value
+    })
+  },
+
+  checkLoginStatus: function(e){
+    var LoginService = new ls.LoginService({});
+
+
+    LoginService.checkLoginStatus();
+
   }
 })
