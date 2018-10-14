@@ -7,7 +7,11 @@ Page({
   data: {
     bgImg: app.globalData.GlobalIMG + 'sy_tishigb_guanggao@2x.png',
     phoneNumber: '',
-    inputPassword: '18812341234'
+    inputPassword: '18812341234',
+    arrow: app.globalData.GlobalIMG + 'btn_xia@3x.png',
+    myphone: '18321401669',
+    waitMinute:58,
+    setPassword:'',
   },
 
   /**

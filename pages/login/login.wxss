@@ -33,7 +33,7 @@
   justify-content: center;
 }
 
-.login{
+.login, .verification-code{
   background: #fff;
   width: 380rpx;
   height: 318rpx;
@@ -44,6 +44,21 @@
   flex-direction: column;
   padding-top: 45rpx;
 }
+
+ .verification-code{
+   padding-top: 0;
+   width: 480rpx;
+   height: 490rpx;
+ }
+
+ .arrow{
+   width: 32rpx;
+   height: 32rpx;
+   margin-top: 26rpx;
+   margin-left: 26rpx;
+   margin-bottom: 34rpx;
+   transform: rotate(90deg);
+ }
 
 .title{
   color: #010101;
@@ -120,4 +135,56 @@
 
 .forget-password::after{
   border: none;
+}
+
+.my-phone{
+  display: flex;
+  flex-direction: row;
+  font-size: 11pt;
+  color: #8b8b8b;
+  justify-content: space-around;
+  padding-left: 30rpx;
+  padding-right: 30rpx;
+}
+
+.wait-minute{
+  background: #fff;
+  padding:20rpx 28rpx;
+  display: block;
+  line-height: 1.4;
+  margin-top: 28rpx;
+  margin-bottom: 80rpx;
+}
+
+.square-box{
+  display: flex;
+  flex-direction: row;
+  padding-left: 8rpx;
+  padding-bottom: 8rpx;
+  box-sizing: border-box;
+}
+
+.square{
+  width: 80rpx;
+  height: 70rpx;
+  border-radius: 8rpx;
+  border: 1px solid #515151;
+  margin-right: 10rpx;
+}
+
+.square:nth-child(1){
+  border-color: #b9b08f;
+  box-shadow: 0 0 8rpx rgba(185, 176, 143, 0.6)
+}
+
+.set-password{
+  color: #a0a0a0;
+  font-size: 9pt;
+  text-align: center;
+  margin-top: -20rpx;
+  margin-bottom: 62rpx;
+}
+
+.set-password-box{
+  height: 345rpx;
 }
