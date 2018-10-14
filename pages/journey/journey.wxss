@@ -171,7 +171,7 @@ icon{
 }
 
 .call-box button{
-  width: 50%;
+  width: 100%;
   background: #fff;
   border-radius: 0px;
   font-size: 11pt;
@@ -244,4 +244,63 @@ icon{
   border-right: 1px solid #ccc;
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
+}
+
+.get-on-the-car-img1{
+  width: 440rpx;
+  background: #fff;
+  border-radius: 40rpx;
+  position: absolute;
+  top: 80rpx;
+  left: 140rpx;
+  font-size: 9pt;
+  display: flex;
+  justify-content: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-top: 15rpx;
+  padding-bottom: 15rpx;
+  padding-left: 35rpx;
+  padding-right: 36rpx;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.get-on-the-car-img1::after{
+  display: block;
+  content:'';
+  width:20rpx;
+  height: 20rpx;
+  background: #fff;
+  position: absolute;
+  bottom: -8rpx;
+  left: 50%;
+  transform: rotate(45deg);
+}
+
+.watting-text{
+  font-weight: 800;
+  padding-left: 18rpx;
+  line-height: 60rpx;
+}
+
+.up-and-down{
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #e6e6e6;
+  height: 60rpx;
+  padding-right: 26rpx;
+}
+.time-wait-string{
+  color :#9196aa;
+}
+
+.time-wait-number{
+  color :#fe7201;
+  font-size: 20rpx;
+}
+
+.font-yuan{
+  font-size: 13pt;
+  font-weight: 100
 }

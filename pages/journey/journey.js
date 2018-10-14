@@ -23,7 +23,10 @@ Page({
     score:'5.0',
     phone: app.globalData.GlobalIMG + 'sy_jiejia_diahua@2x.png',
     phoneNumberOfDriver: '18321450000',
-    callhim:false
+    callhim:false,
+    kilometer: 1,
+    driveTime:2,
+    howmuch:0.2
   },
 
   // 点击打电话跳出模态框
