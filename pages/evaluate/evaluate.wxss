@@ -222,18 +222,3 @@ icon{
   color: #fe7201;
   padding-right: 6rpx;
 }
-.sug_info{
-   display: flex;
-  flex-direction: column;
-}
-.yuzhong{
-  height: 30rpx;
-  border: red
-}
-
-.place-address{
-  color: #92929a;
-  font-size: 25rpx;
-  border-bottom: 1px solid #f5f5f7;
-
-}

@@ -1,11 +1,13 @@
 {
   "pages": [
-    "pages/journey/journey",
-    "pages/arrive/arrive",
-    "pages/login/login",
     "pages/index/index",
-    "pages/takeover/takeover",
     "pages/waitting/waitting",
+    "pages/journey/journey",
+    "pages/paythefare/paythefare",
+    "pages/login/login",
+    "pages/arrive/arrive",
+    "pages/evaluate/evaluate",
+    "pages/takeover/takeover",
     "pages/express/express",
     "pages/history/history",
     "pages/logs/logs"

@@ -162,6 +162,7 @@
   padding-left: 8rpx;
   padding-bottom: 8rpx;
   box-sizing: border-box;
+  text-align: center
 }
 
 .square{
@@ -170,6 +171,12 @@
   border-radius: 8rpx;
   border: 1px solid #515151;
   margin-right: 10rpx;
+}
+.square-input{
+   border: 1px solid #515151;
+    position: absolute;
+    top: 613rpx;
+    width: 62%;
 }
 
 .square:nth-child(1){

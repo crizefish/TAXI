@@ -14,21 +14,19 @@
         <view class='input-box'>
           <view class='top-box'>
             <view class='circle green-circle'></view>
-            <input type='text' class='now-position' value='{{markers[0].address}}' ></input>
+            <input type='text' class='now-position' value='{{markers[0].address}}'></input>
           </view>
           <view class='top-box bottom-box'>
             <view class='circle orange-circle'></view>
-            <input auto-focus type="text" bindinput="bindKeyInput" class='now-position' placeholder='您要去哪儿' value='{{destination}}' bindtap='hiddenEgg'></input>
-          
-            <view class='chat' style='background-image:url({{chatImg}});display:{{chatShow}}' wx-if="{{hiddenEgg=='show'}}">
+            <input auto-focus type="text" bindinput="bindKeyInput" class='now-position' placeholder='您要去哪儿' value='{{destination}}'></input>
+            <view class="sug_info"> 
+                  <text>{{sugData}}</text> 
+            </view>
+            <view class='chat' style='background-image:url({{chatImg}});display:{{chatShow}}'>
               去：{{whereAreUGoing}} 
               <icon type="clear" size="20"/>
             </view>
           </view>
-            <view class="sug_info" style='font-size:30rpx' wx:for="{{sugResult}}" wx:key="key"  data-item="{{item}}" bindtap='choiceTarget'>
-                   <text>{{item.title}}</text> 
-                   <text class='place-address'>{{item.address}}</text>
-            </view>
         </view>
         <view class='aim-box'>
           <image class='aim' src='{{aim}}'></image>

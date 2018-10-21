@@ -1,6 +1,9 @@
 //app.js
 App({
   onLaunch: function () {
+    console.log(this.globalData.RequestURL)
+    var diff = 0;
+
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -36,9 +39,12 @@ App({
   globalData: {
     //全局变量
       userInfo: null,
-      GlobalIMG: "http://yxcx.zmkjgame.com/tp/",
+      GlobalIMG: "https://yxcx.zmkjgame.com/tp/",
       ProjectId: "wx6e1c390d1d14beff",
-      RequestURL:"http://yxcx.zmkjgame.com/api_doc/"
+      RequestURL: "https://bsyy.zmkjgame.com/",
+  },
+  userData:{
+    TimeDiff:0
   }
 })
 

@@ -5,7 +5,7 @@
         <view class='get-on-the-car-img'>
           <view class='up-and-down'>
               <view class='time-wait-string'>等待</view>
-              <view class='time-wait-number'>00:41</view>
+              <view class='time-wait-number'>{{time}}</view>
           </view>
         <view class='watting-text'>正在为您寻找车辆</view>
         </view> 

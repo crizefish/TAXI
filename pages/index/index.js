@@ -1,8 +1,6 @@
-//index.js
+
 //获取应用实例
 const app = getApp();
-
-
 // 引用百度地图微信小程序JSAPI模块 
 var bmap = require('../../libs/bmap-wx.min.js');
 var wxMarkerData = [];
@@ -16,6 +14,7 @@ Page({
     nowPosition: '您当前所在的位置',
     destination: '', // 目的地
     whereAreUGoing: '北京天安门',
+    hiddenEgg:'show',
     timeWait: '2分钟后',
     pathOfCar: app.globalData.GlobalIMG + 'alc@2x.png',
     aim: app.globalData.GlobalIMG + 'sy_dingwei@2x.png',
@@ -30,7 +29,6 @@ Page({
 
   // 绑定input输入 
   bindKeyInput: function (e) {
-    whereAreUGoing: '422';
     var that = this;
     // 新建百度地图对象 
     var BMap = new bmap.BMapWX({
@@ -40,23 +38,31 @@ Page({
       console.log(data)
     };
     var success = function (data) {
-      var sugData = '';
-      for (var i = 0; i < data.result.length; i++) {
-        sugData = sugData + data.result[i].name + '\n';
-      }
+      console.log(data)
+      var sugResult = data.wxMarkerData;
       that.setData({
-        sugData: sugData
+        sugResult: sugResult,
+        hiddenEgg: 'hidden'
       });
     }
     // 发起suggestion检索请求 
-    BMap.suggestion({
-      query: e.detail.value,
-      region: '北京',
-      city_limit: true,
+    BMap.search({
+      "query": e.detail.value,
       fail: fail,
-      success: success
+      success: success,
+      // 此处需要在相应路径放置图片文件 
+      iconPath: '../../img/marker_red.png',
+      // 此处需要在相应路径放置图片文件 
+      iconTapPath: '../../img/marker_red.png'
     });
   } ,
+
+  choiceAddress: function (e) {
+    this.setData({
+      hiddenEgg: 'hidden'
+    })
+  },
+
 
   makertap: function (e) {
     var that = this;
@@ -74,6 +80,41 @@ Page({
       }
     });
   },
+  //检查登陆状态
+  checkLogin:function(e){
+    var token = wx.getStorageSync('token');
+    if (token == null || token == "") {
+      wx.navigateTo({    //保留当前页面，跳转到应用内的某个页面（最多打开5个页面，之后按钮就没有响应的）
+        url: "/pages/login/login"
+      })
+    }
+  },
+
+  choiceTarget:function (e){
+    var item = e.currentTarget.dataset.item;
+    console.log(e.currentTarget.dataset.location)
+    this.setData({
+      destination: item.title,
+      sugResult:[]
+
+    })
+    //存储路线信息
+    var from_location = this.data.latitude + "," + this.data.longitude;
+    var from_address = this.data.desc + "|||" + this.data.address;
+    var to_location = item.latitude + "," + item.longitude;
+    var to_address = item.title + "|||" + item.address ;
+    wx.setStorage({ key: "from_location", data: from_location});
+    wx.setStorage({ key: "to_location", data: to_location});
+    wx.setStorage({ key: "from_address", data: from_address});
+    wx.setStorage({ key: "to_address", data: to_address });
+    var token = wx.getStorageSync('token');
+    if (token == null || token == "") {
+      wx.navigateTo({    //保留当前页面，跳转到应用内的某个页面（最多打开5个页面，之后按钮就没有响应的）
+        url: "/pages/login/login"
+      })
+    }
+  },
+
 
   onLoad: function () {
     if (app.globalData.userInfo) {
@@ -118,14 +159,11 @@ Page({
         markers: wxMarkerData
       });
       that.setData({
-        latitude: wxMarkerData[0].latitude
+        latitude: wxMarkerData[0].latitude,
+        longitude: wxMarkerData[0].longitude,
+        address: wxMarkerData[0].address,
+        desc: wxMarkerData[0].desc
       });
-      that.setData({
-        longitude: wxMarkerData[0].longitude
-      });
-      console.log( wxMarkerData[0].latitude
-     
-      )
     }
     BMap.regeocoding({
       fail: fail,
@@ -151,7 +189,6 @@ Page({
       hasUserInfo: true
     })
   }
-
 
 
 })

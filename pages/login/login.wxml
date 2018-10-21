@@ -3,8 +3,8 @@
   <view class='bg'>
   </view>
   <view class='content'>
-     <view class='login'>
-      <text class='title'>登录</text>
+     <view class='login' wx-if="{{showDiv=='init'}}">
+      <text  class='title'>登录</text>
       <view class='input-box'>
         <text>>+86</text>
         <input type='text' bindinput='phoneNumberInput' class='input' value='{{phoneNumber}}' placeholder='请输入手机号码'></input>
@@ -13,34 +13,35 @@
     </view>   
 
 
-    <!-- <view class='inpu-password'>
+    <view class='inpu-password'   wx-if="{{showDiv=='login'}}">
       <text class='title'>输入密码</text>
       <view class='input-box-of-password'>
-        <input type='text' class='input' value='{{inputPassword}}'></input>
+        <input   type='text' class='input' value='{{inputPassword}}'></input>
       </view>
       <view class='input-box-of-password password-box'>
-        <input type='text' class='input' value='{{password}}' placeholder='请输入密码'></input>
+        <input type='password' class='input' value='{{password}}' placeholder='请输入密码' bindinput='passwordInput'></input>
       </view> 
-      <button class='forget-password'>忘记密码</button>
-      <button class='next'>登录</button>
-    </view>      -->
-    <!-- <view class='verification-code'>
-      <image class='arrow' src='{{arrow}}'></image>
+      <button class='forget-password' bindtap="changeDivGetCode">忘记密码</button>
+      <button class='next' bindtap='login'>登录</button>
+    </view>     
+     <view class='verification-code'  wx-if="{{showDiv=='getCode'}}">
+      <image class='arrow' src='{{arrow}}' bindtap='changeDivLogin'></image>
       <text class='title'>输入验证码</text>
       <view class='my-phone'>
         <text>密码已发送至</text>
-        <text>{{myphone}}</text>
+        <text>{{inputPassword}}</text>
       </view>
-      <button class='wait-minute'>
-      {{waitMinute}}s后重新获取
+      <button class='wait-minute' wx-disabled='is_show' bindtap='clickVerify'>
+      {{last_time==0?'获取验证码':last_time+'s后重新获取'}}
       </button>
       <view class='square-box'>
-        <input class='square' type='text'  wx:for="{{6}}"></input>
+        <view class='square' type='text' value="{{userCode}}"  wx:for="{{6}}" maxlength='1' bindinput="checkCode"></view>
       </view>
-    </view>  -->
+      <input class='square-input ' type='number' value="{{userCode}}" maxlength='6'></input>
+    </view>
 
     <!-- 设置密码 -->
-    <!-- <view class='inpu-password set-password-box'>
+     <view class='inpu-password set-password-box'  wx-if="{{showDiv=='setPsd'}}">
       <text class='title'>设置登录密码</text>
       <view class='input-box-of-password'>
         <input type='text' class='input' value='{{setPassword}}' placeholder='请输入6-16位密码'></input>
@@ -49,6 +50,6 @@
         须包含数字、字母、符号中至少两种元素
       </text> 
       <button class='next'>确 认</button>
-    </view>  -->
+    </view>
   </view>
 </view>
