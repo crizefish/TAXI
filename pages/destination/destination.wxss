@@ -1,0 +1,71 @@
+.page-body{
+  position: fixed; 
+  height: 100%; 
+  width: 100%; 
+  display:flex; 
+  flex-direction: column;
+}
+.city{
+  width: 100rpx;
+}
+.title{
+   display:flex; 
+  flex-direction: row;
+  font-size: 13pt;
+  padding-left: 20rpx;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1px solid #dde1e4;
+  border-top: 1px solid #dde1e4
+}
+.title input{
+  margin-left: 40rpx;
+  padding-left: 1px solid #dde1e4
+}
+.for-sign{
+   display:flex; 
+  flex-direction: row;
+   border-bottom: 1px solid #dde1e4;
+}
+.sign{
+  padding-top: 30rpx;
+  padding-left: 20rpx
+}
+.address{
+  padding-top: 15rpx;
+  padding-right: 15rpx;
+  color:   #888;
+  font-size: 11pt;
+}
+.picker{
+  display: flex;
+  flex-direction: row
+}
+.picker-sign{
+    width:0;
+    height:0;
+    border-width:15rpx 15rpx 0;
+    border-style:solid;
+    border-color:#333 transparent transparent;/*灰 透明 透明 */
+    position:relative;
+    opacity: 0.5;
+    top:25rpx;
+    
+}
+.choice{
+   display:flex; 
+  flex-direction: column;
+  font-size: 13pt;
+  padding-left: 20rpx;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+ 
+}
+
+/*隐藏滚动条*/
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}

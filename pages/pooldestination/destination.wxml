@@ -1,0 +1,30 @@
+ <view class='title'>
+
+    <input type='text' placeholder='你从哪儿下车' bindinput='bindKeyInput' auto-focus='true' style='font-size:11pt'></input>
+  <text class='cancel-text' bindtap='toIndex'>取消</text>
+  </view>
+
+<scroll-view class='page-body' scroll-y="true">
+ 
+ <view class='content-history' bindtap='toIndex'>
+          <view class='input-box' style= 'width: 80%'>
+            <view class='top-box-history'>
+              <view class='circle green-circle'></view>
+              <text class='history-city'>北京市</text>
+              <view class='line-split'></view>
+              <text class='history-detail'>大红门</text>
+            </view>
+            <view class='bottom-box-history'>
+              <view class='circle orange-circle'></view>
+              <text class='history-city'>天津市</text>
+              <view class='line-split'></view>
+              <text class='history-detail'>宁和郑振富</text>
+            </view>
+          </view>
+          <view class='for-column'>
+            <text class='orange-text  '>120</text>
+            <text style='font-size:11pt'>元/人</text>
+          </view>
+        </view>
+
+</scroll-view>

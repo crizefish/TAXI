@@ -191,3 +191,7 @@ icon{
 icon{
   margin-right: 9rpx;
 }
+comment{
+  top :10rpx;
+  height: 200rpx;
+}

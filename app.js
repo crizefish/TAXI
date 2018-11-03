@@ -1,6 +1,7 @@
 //app.js
 App({
   onLaunch: function () {
+    this.getScreenHeight()
     console.log(this.globalData.RequestURL)
     var diff = 0;
 
@@ -41,10 +42,27 @@ App({
       userInfo: null,
       GlobalIMG: "https://yxcx.zmkjgame.com/tp/",
       ProjectId: "wx6e1c390d1d14beff",
-      RequestURL: "https://bsyy.zmkjgame.com/",
+      Screenheight: ''
   },
   userData:{
     TimeDiff:0
+  },
+
+  getScreenHeight : function () {
+    let that = this
+    wx.getSystemInfo({
+      success: function (res) {
+        // this.setData({
+        //   Screenheight: res.windowHeight
+        // })
+        wx.setStorage({
+          key: "Screenheight",
+          data: res.windowHeight
+        })
+        console.log('=================》', wx.getStorageSync('Screenheight'))
+      }
+    })
   }
 })
+
 

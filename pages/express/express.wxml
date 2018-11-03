@@ -1,2 +1,42 @@
-<!--pages/express/express.wxml-->
-<text>pages/express/express.wxml</text>
+<view class='page-body'>
+  <view class='container-box'>
+    <map class="map" id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="14" show-location="true" markers="{{markers}}" bindmarkertap="makertap" style="width:100%;height:320px;"></map>
+    <view class='choice-box'>
+      <view class='content'>
+        <view class='now'>现在</view>
+        <view class='input-box'>
+          <view class='top-box'>
+            <view class='circle green-circle'></view>
+            <input type='text' class='now-position' value='{{markers[0].address}}'></input>
+          </view>
+          <view class='top-box bottom-box'>
+            <view class='circle orange-circle'></view>
+            <input auto-focus type="text" bindinput="bindKeyInput" class='now-position' placeholder='您要去哪儿' value='{{destination}}'></input>
+
+            <view class='chat' style='background-image:url({{chatImg}});display:{{chatShow}}' wx-if="{{hiddenEgg=='show'}}">
+              去：{{whereAreUGoing}}
+              <icon type="clear" size="20" />
+            </view>
+          </view>
+          <view class="sug_info" style='font-size:30rpx' wx:for="{{sugResult}}" wx:key="key" data-item="{{item}}" bindtap='choiceTarget'>
+            <text>{{item.title}}</text>
+            <text class='place-address'>{{item.address}}</text>
+          </view>
+        </view>
+        <view class='aim-box' bindtap='clear'>
+          <image class='aim' src='{{aim}}'></image>
+        </view>
+        <view class='path'>
+          <image class='path-of-car' src='{{pathOfCar}}'></image>
+        </view>
+        <view class='get-on-the-car'>
+          <view class='get-on-the-car-img' style='background-image:url({{getOnTheCar}})'>
+            <view class='time-wait'>{{timeWait}}</view>
+            <view>上车</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>

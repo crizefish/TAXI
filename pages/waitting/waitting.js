@@ -1,6 +1,7 @@
 const app = getApp();
+var bmap = require('../../libs/bmap-wx.min.js');
 var netWork = require('../../utils/netWork.js')
-
+var wxMarkerData = [];
 Page({
   /**
    * 页面的初始数据
@@ -17,6 +18,34 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
+    var BMap = new bmap.BMapWX({
+      ak: '9nxZMWueKmnnnGgrt6Ie7fR3EdjYTD6N'
+    });
+    var fail = function (data) {
+      console.log(data)
+    };
+    var success = function (data) {
+      wxMarkerData = data.wxMarkerData;
+      console.log(data.wxMarkerData)
+      that.setData({
+        markers: wxMarkerData
+      });
+      that.setData({
+        latitude: wxMarkerData[0].latitude,
+        longitude: wxMarkerData[0].longitude,
+        address: wxMarkerData[0].address,
+        desc: wxMarkerData[0].desc
+      });
+    }
+    BMap.regeocoding({
+      fail: fail,
+      success: success,
+      // iconPath: '../../img/marker_red.png',
+      // iconTapPath: '../../img/marker_red.png'
+    });
+
+
     //倒计时
     timing(this);
     charging(this);
@@ -36,7 +65,40 @@ Page({
         if (res.code == 0) {
           wx.setStorage({ key: "order_sn", data: res.data.result.order_sn});
           wx.navigateTo({
-            url: "/pages/waitting/waitting"
+            url: "/pages/takeover/takeover"
+          })
+        } else if (res.msg == '您有订单正在进行中。'){
+          netWork.paramsCB({
+            "token": wx.getStorageSync('token'),
+            "order_sn": wx.getStorageSync('order_sn')
+          }, function (params) {
+            netWork.httpPOST("/kcv1/user/orderDetail", params, function (res) {
+              if (res.code == 0) {
+                var orderStatus = res.data.result.order.order_status;
+                //  -3 超时取消 -2 司机取消 -1 用户取消  0 发单 1 已抢单 2 到达乘客地点 3 接到乘客  4 到达目的地  5 发起收款  6 已确认付款
+                if (orderStatus == 5) {
+
+                  wx.navigateTo({
+                    url: "/pages/paythefare/paythefare"
+                  })
+                }else{
+                  wx.showModal({
+                    title: res.msg,
+                    success: function (res) {
+                      if (res.confirm) {
+                        wx.navigateTo({
+                          url: "/pages/takeover/takeover"
+                        })
+                      } else if (res.cancel) {
+                        wx.navigateTo({
+                          url: "/pages/index/index"
+                        })
+                      }
+                    }
+                  })
+                }
+              }
+            })
           })
         } else {
           alertInfo(res.msg)
@@ -92,7 +154,44 @@ Page({
    */
   onShareAppMessage: function () {
   
-  }
+  },
+  confirmCancel: function () {
+    wx.showModal({
+      title: "确定取消订单吗",
+      success: function (res) {
+        if (res.confirm) {
+          netWork.paramsCB({
+            "token": wx.getStorageSync('token'),
+            "order_sn": wx.getStorageSync('order_sn')
+          }, function (params) {
+            netWork.httpPOST("/kcv1/user/cancelOrder", params, function (res) {
+              if (res.code == 0) {
+                wx.showModal({
+                  title: "取消订单成功",
+                  success: function (res) {
+                    if (res.confirm) {
+                      wx.navigateTo({
+                        url: "/pages/index/index"
+                      })
+                    } else if (res.cancel) {
+                      wx.navigateTo({
+                        url: "/pages/index/index"
+                      })
+                    }
+                  }
+                })
+              } else {
+                alertInfo(res.msg)
+              }
+            })
+          })
+        } else if (res.cancel) {
+          console.log("用户放弃取消订单")
+        }
+      }
+    })
+  },
+
 })
 function timing(that) {
   var seconds = that.data.seconds
@@ -147,9 +246,13 @@ function alertInfo(msg) {
     title: msg,
     success: function (res) {
       if (res.confirm) {
-        console.log('用户点击确认')
+        wx.navigateTo({
+          url: "/pages/index/index"
+        })
       } else if (res.cancel) {
-        console.log('用户点击取消')
+        wx.navigateTo({
+          url: "/pages/index/index"
+        })
       }
     }
   })

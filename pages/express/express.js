@@ -2,6 +2,12 @@
 //获取应用实例
 const app = getApp();
 
+// 引用百度地图微信小程序JSAPI模块 
+var bmap = require('../../libs/bmap-wx.min.js');
+var netWork = require('../../utils/netWork.js')
+
+var wxMarkerData = [];
+
 
 // 引用百度地图微信小程序JSAPI模块 
 var bmap = require('../../libs/bmap-wx.min.js');

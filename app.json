@@ -1,16 +1,21 @@
 {
   "pages": [
+
+
     "pages/index/index",
-    "pages/waitting/waitting",
-    "pages/journey/journey",
+            "pages/carpool/carpool",
+    "pages/destination/destination",
+    "pages/pooldestination/destination",
     "pages/paythefare/paythefare",
     "pages/login/login",
-    "pages/arrive/arrive",
-    "pages/evaluate/evaluate",
+    "pages/waitting/waitting",
+    "pages/gameover/gameover",
     "pages/takeover/takeover",
-    "pages/express/express",
     "pages/history/history",
-    "pages/logs/logs"
+    "pages/express/express",
+    "pages/arrive/arrive",
+    "pages/logs/logs",
+    "pages/carpool"
   ],
   "window": {
     "backgroundTextStyle": "light",

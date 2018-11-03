@@ -16,7 +16,6 @@
   left:0;
   top:0;
   background: inherit;
-  filter: blur(15px);
   z-index: 2;
 }
 
@@ -89,7 +88,7 @@
 
 .input-box text{
   padding-right: 20rpx;
-  padding-top: 7rpx;
+  color: #333;
 }
 
 .input{
@@ -179,7 +178,7 @@
     width: 62%;
 }
 
-.square:nth-child(1){
+.square-choice{
   border-color: #b9b08f;
   box-shadow: 0 0 8rpx rgba(185, 176, 143, 0.6)
 }

@@ -1,6 +1,6 @@
 <!--pages/paythefare/paythefare.wxml-->
-<view class='page-body'>
-    <!--以下是司机相关信息  -->
+<scroll-view class='page-body' scroll-y="true">
+  <!--以下是司机相关信息  -->
   <view class='message-box'>
     <view class='driver-box'>
       <view class='driver-message'>
@@ -16,7 +16,7 @@
         <view class='car-box'>
           <image src='{{callDriver}}' class='call-driver'></image>
         </view>
-      </view> 
+      </view>
       <view class='position-box'>
         <view class='dot'>
           <view class='green'></view>
@@ -27,7 +27,7 @@
           <text class='current-pos'>{{currentPos}}</text>
           <text class='destination'>{{destination}}</text>
         </view>
-      </view>    
+      </view>
     </view>
     <!--以下是支付金额  -->
     <view class='pay'>
@@ -49,11 +49,11 @@
         </view>
         <view class='item'>
           <text>里程费 ({{mileage}}公里)</text>
-          <text class='starting-price'>{{startingPrice}}元</text>
+          <text class='starting-price'>{{kmFee}}元</text>
         </view>
         <view class='item'>
           <text>时长费 ({{minute}}分钟)</text>
-          <text class='starting-price'>{{startingPrice}}元</text>
+          <text class='starting-price'>{{timeFee}}元</text>
         </view>
       </view>
     </view>
@@ -63,32 +63,35 @@
     </view>
     <view class='driver-box quick methods'>
       <view class='about-trip'>
-        <view class='item'>
+        <view class='item' bindtap='choicePayType' id="balance" data-hi="WeChat">
           <view class='pay-pay'>
-            <image src='{{BalancePayment}}' class='pay-image'></image>
+            <image src='{{balancePayment}}' class='pay-image'></image>
             <text>余额支付</text>
           </view>
-          <image src='{{selected}}' class='selected'></image>
+          <image src='{{selected}}' class='selected' wx:if="{{payType=='balance'}}"></image>
+          <image src='{{select}}' class='selected' wx:if="{{payType!='balance'}}"></image>
         </view>
-        <view class='item'>
+        <view class='item' bindtap='choicePayType' id="weixinApp" data-hi="WeChat">
           <view class='pay-pay'>
             <image src='{{wechatPayment}}' class='pay-image'></image>
             <text>微信支付</text>
           </view>
-          <image src='{{select}}' class='selected'></image>
+          <image src='{{selected}}' class='selected' wx:if="{{payType=='weixinApp'}}"></image>
+          <image src='{{select}}' class='selected' wx:if="{{payType!='weixinApp'}}"></image>
         </view>
-        <view class='item'>
+        <!-- <view class='item' bindtap='choicePayType' id="alipayApp" data-hi="WeChat">
           <view class='pay-pay'>
             <image src='{{alipayPayment}}' class='pay-image'></image>
             <text>支付宝支付</text>
           </view>
-          <image src='{{select}}' class='selected'></image>
-        </view>
+          <image src='{{selected}}' class='selected' wx:if="{{payType=='alipayApp'}}"></image>
+          <image src='{{select}}' class='selected' wx:if="{{payType!='alipayApp'}}"></image>
+        </view> -->
       </view>
     </view>
     <!--以下是按钮  -->
-    <view class='message-box btn-box'>
-    <button class='pay-button'>去支付</button>
+    <view class='message-box btn-box' bindtap='pay'>
+      <button class='pay-button'>去支付</button>
     </view>
   </view>
-</view>
+</scroll-view>

@@ -1,8 +1,8 @@
 <!--pages/waitting/waitting.wxml-->
 <view class='page-body'>
-    <map id="map" longitude="113.324520" latitude="23.099994" scale="18" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location style="width: 100%; height: 800px;" >  </map> 
-    <view class='get-on-the-car-img'>
-      <view class='watting-time'>距您
+ <map class="map" id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="14" show-location="true" markers="{{markers}}" bindmarkertap="makertap" style="width:100%;height:63vh;"></map> 
+  <view class='get-on-the-car-img'>
+    <view class='watting-time'>距您
       <view class='orange'>
         {{kilometre}}
       </view>
@@ -11,58 +11,65 @@
         {{waitTime}}
       </view>
       分钟</view>
-    </view>
-    <!--以下是轿车  -->
-    <view class='path'>
-      <image class='car-image-style' src='{{pathOfCar}}'></image>
-    </view> 
-    <!--以下是回到当前位置  -->
-    <view class='now-position'>
-      <image class='now-position-image-style' src='{{nowPosition}}'></image>
-    </view>
-    <!--以下是司机相关信息  -->
-    <view class='bottom-message-box'>
-      <view class='cancel-box'>
-        <view class='driver-img--box'>
-          <image class='driver-img-style' src='{{driverImg}}'></image>
-        </view>
-        <view class='text'>
-          <text>司机正努力赶来，请您耐心等待。若您改变行程，可在</text>
-          <text class='orange'>{{cancelTimeHours}}</text>
-          <text class='orange'>:</text>
-          <text class='orange'>{{cancelTimeMinute}}</text>
-          <text>前免费取消。</text>
-        </view>
+  </view>
+  <!--以下是轿车  -->
+  <view class='path'>
+    <image class='car-image-style' src='{{pathOfCar}}'></image>
+  </view>
+  <!--以下是回到当前位置  -->
+  <view class='now-position'>
+    <image class='now-position-image-style' src='{{nowPosition}}'></image>
+  </view>
+  <!--以下是司机相关信息  -->
+  <view class='bottom-message-box'>
+    <view class='cancel-box'>
+      <view class='driver-img--box'>
+        <image class='driver-img-style' src='{{driverImg}}'></image>
       </view>
-      <view style='box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);'>
-        <view class='driver-box'>
-          <view class='driver-message'>
-            <view class='car-box'>
-              <text class='license'>{{license}}</text>
-              <text class='colorAndBrand'>{{colorOfCar}}•{{brand}}</text>
-            </view>
-            <view class='driver'>
-              <image class='driver-image-style' src='{{driver}}'></image>
-              <view class='evaluate'>
-                <text class='driver-name'>{{driverName}}</text>
-                <view>
-                  <image class='star' src='{{star}}'></image>
-                  <text class='score'>{{score}}</text>
-                </view>
+      <view class='text' wx:if="{{orderStatus==1}}">
+        <text>司机正努力赶来，请您耐心等待。若您改变行程，可在</text>
+        <text class='orange'>{{cancelTimeHours+':'+cancelTimeMinute}}</text>
+        <text>前免费取消。</text>
+      </view>
+      <view class='text' wx:if="{{orderStatus==2}}">
+        <text>司机已经到达，您可联系司机确认上车地点。</text>
+      </view>
+      <view class='text' wx:if="{{orderStatus==3}}">
+        <text>行程开始，请系好安全带。</text>
+      </view>
+      <view class='text' wx:if="{{orderStatus==4}}">
+        <text>已到达目的地，下车请带好物品。</text>
+      </view>
+    </view>
+    <view style='box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);'>
+      <view class='driver-box'>
+        <view class='driver-message'>
+          <view class='car-box'>
+            <text class='license'>{{license}}</text>
+            <text class='colorAndBrand'>{{colorOfCar}}•{{brand}}</text>
+          </view>
+          <view class='driver'>
+            <image class='driver-image-style' src='{{driver}}'></image>
+            <view class='evaluate'>
+              <text class='driver-name'>{{driverName}}</text>
+              <view>
+                <image class='star' src='{{star}}'></image>
+                <text class='score'>{{score}}</text>
               </view>
             </view>
-          </view>     
+          </view>
         </view>
-        <view class='call-box'>
-          <button class='call'>
-            <image class='phone-img' src='{{phone}}'></image>
-            <text>打电话</text>
-          </button>
-          <button class='cancel'>
-            <icon type='clear' size='16' color='#343434'></icon>
-            <text>取消订单</text>
-          </button> 
-        </view>
-      </view> 
+      </view>
+      <view class='call-box'>
+        <button class='call' bindtap='callDriver'>
+          <image class='phone-img' src='{{phone}}'></image>
+          <text>打电话</text>
+        </button>
+        <button class='cancel' bindtap='confirmCancel'>
+          <icon type='clear' size='16' color='#343434'></icon>
+          <text>取消订单</text>
+        </button>
+      </view>
     </view>
+  </view>
 </view>

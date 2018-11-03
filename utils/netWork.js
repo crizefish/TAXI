@@ -316,19 +316,19 @@ function Post(url, params, cb) {
       wx.hideNavigationBarLoading();
       if (res.data.code == -100 || res.data.code == -101 ) {
         wx.showModal({
-          title: '账号过期,请点击确定重新登录',
+          title: '账号过期,请重新登录',
           success: function (res) {
             if (res.confirm) {
               wx.removeStorageSync('token')
               wx.removeStorageSync('key')
               wx.removeStorageSync('jetlag')
-              wx.navigateTo({
-                url: "/pages/login/login"
-              })
+              // wx.navigateTo({
+              //   url: "/pages/login/login"
+              // })
             } else if (res.cancel) {
-              wx.navigateTo({
-                url: "/pages/login/login"
-              })
+              // wx.navigateTo({
+              //   url: "/pages/login/login"
+              // })
             }
           }
         })
