@@ -81,7 +81,7 @@
     <!-- 拼车 -->
     <view wx:if="{{typeOfCar=='拼车'}}">
       <view class='choice-box-pool' wx:if="{{step == 'choice'}}">
-        <view class='content-pool'>
+        <view class='content-pool' style='margin-bottom:10rpx'>
           <view class='input-box'>
             <view class='top-box'>
               <view class='circle green-circle'></view>
@@ -102,23 +102,23 @@
             <image class='star' src="{{star}}"></image>
             <text class='title-text'>历史线路</text>
           </view>
-          <view class='content-history'>
+          <view class='content-history' bindtap='choiceTarget' data-index="0">
             <view class='input-box' style='width: 80%'>
               <view class='top-box-history'>
                 <view class='circle green-circle'></view>
-                <text class='history-city'>北京市</text>
+                <text class='history-city'>{{allResult[0].from_city}}</text>
                 <view class='line-split'></view>
-                <text class='history-detail'>大红门</text>
+                <text class='history-detail'>{{allResult[0].from_address}}</text>
               </view>
               <view class='bottom-box-history'>
                 <view class='circle orange-circle'></view>
-                <text class='history-city'>天津市</text>
+                <text class='history-city'>{{allResult[0].to_city}}</text>
                 <view class='line-split'></view>
-                <text class='history-detail'>宁和郑振富</text>
+                <text class='history-detail'>{{allResult[0].to_address}}</text>
               </view>
             </view>
             <view class='for-column'>
-              <text class='orange-text  '>120</text>
+              <text class='orange-text  '>{{allResult[0].fare}}</text>
               <text style='font-size:11pt'>元/人</text>
             </view>
           </view>
@@ -127,23 +127,23 @@
             <image class='star' src="{{star}}"></image>
             <text class='title-text'>全部线路</text>
           </view>
-          <view class='content-history'>
+          <view class='content-history' bindtap='choiceTarget' wx:for='{{allResult}}' wx:key="id" data-index="{{index}}">
             <view class='input-box' style='width: 80%'>
               <view class='top-box-history'>
                 <view class='circle green-circle'></view>
-                <text class='history-city'>北京市</text>
+                <text class='history-city'>{{item.from_city}}</text>
                 <view class='line-split'></view>
-                <text class='history-detail'>大红门</text>
+                <text class='history-detail'>{{item.from_address}}</text>
               </view>
               <view class='bottom-box-history'>
                 <view class='circle orange-circle'></view>
-                <text class='history-city'>天津市</text>
+                <text class='history-city'>{{item.to_city}}</text>
                 <view class='line-split'></view>
-                <text class='history-detail'>的成分VS</text>
+                <text class='history-detail'>{{item.to_address}}</text>
               </view>
             </view>
             <view class='for-column'>
-              <text class='orange-text  '>10</text>
+              <text class='orange-text  '>{{item.fare}}</text>
               <text style='font-size:11pt'>元/人</text>
             </view>
           </view>
@@ -156,19 +156,19 @@
           <view class='input-box'>
             <view class='bottom-box-history'>
               <image src='{{aim}}' class='aim'></image>
-              <text style='font-size: 14pt;padding-left:48rpx;'>当前位置</text>
+              <text style='font-size: 14pt;padding-left:48rpx;'>{{address}}</text>
             </view>
             <view class='top-box-history'>
               <view class='circle green-circle'></view>
-              <text class='history-city'>北京市</text>
+              <text class='history-city'>{{choiceResult.from_city}}</text>
               <view class='line-split'></view>
-              <text class='history-detail'>大红门</text>
+              <text class='history-detail'>{{choiceResult.from_address}}</text>
             </view>
             <view class='bottom-box-history' style=' border-bottom: 1px solid #cccccc;'>
               <view class='circle orange-circle'></view>
-              <text class='history-city'>天津市</text>
+              <text class='history-city'>{{choiceResult.to_city}}</text>
               <view class='line-split'></view>
-              <text class='history-detail'>宁和郑振富</text>
+              <text class='history-detail'>{{choiceResult.to_address}}</text>
             </view>
             <view class='bottom-box-history space-around'>
               <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
@@ -196,7 +196,7 @@
           <view class='input-box'>
             <view class='bottom-box-remark'>
               <text class='remark-text'>共约</text>
-              <text style='color:#ff8901;font-size:20pt'>10.0</text>
+              <text style='color:#ff8901;font-size:20pt'>{{fare}}</text>
               <text class='remark-text'>元</text>
             </view>
             <view class='bottom-box-remark'>

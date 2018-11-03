@@ -1,11 +1,10 @@
 {
   "pages": [
-
-
-    "pages/index/index",
-            "pages/carpool/carpool",
-    "pages/destination/destination",
+        "pages/index/index",
     "pages/pooldestination/destination",
+
+    "pages/carpool/carpool",
+    "pages/destination/destination",
     "pages/paythefare/paythefare",
     "pages/login/login",
     "pages/waitting/waitting",

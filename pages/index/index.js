@@ -43,21 +43,25 @@ Page({
     people: app.globalData.GlobalIMG + "pc_renshu@2x.png",
     timeImg: app.globalData.GlobalIMG + "pc_shijian@2x.png",
     aim: app.globalData.GlobalIMG + "pc_dingwei@2x.png",
-    array: ['乘车人数', '1', '2', '3', '4', '5', '6', '7'],
+    array: ['乘车人数', '1人', '2人', '3人', '4人', '5人', '6人', '7人'],
+    allResult: [],
+    choiceResult: {},
     index: 0,
     step: "choice",
-    history: { 
-      from_address:"",
+    history: {
+      from_address: "",
       from_city: "",
       from_district: "",
       from_id: "",
       from_location: "",
-      },
+    },
+    time:'',
+    fare:0,
+    singleFare:0,
     multiArray: [
-      ["今天", "明天", "后天"],
+      ["选择时间","现在","今天", "明天", "后天"],
       ["1点", "2点", "3点", "4点", "5点", "6点", "7点", "8点", "9点", "10点", "11点", "12点", "13点", "14点", "15点", "16点", "17点", "18点", "19点", "20点", "21点", "22点", "23点", "24点"],
-      ["00分", "01分", "02分", "03分", "04分", "05分", "06分", "07分", "08分", "09分", "10分", "11分", "12分", "13分", "14分", "15分", "16分", "17分", "18分", "19分", "20分", "21分", "22分", "23分", "24分", "25分", "26分", "27分", "28分", "29分", "30分", "31分", "32分", "33分", "34分", "35分", "36分", "37分", "38分", "39分", "40分", "41分", "42分", "43分", "44分", "45分", "46分", "47分", "48分", "49分", "50分", "51分", "52分", "53分", "54分", "55分", "56分", "57分", "58分", "59分"]
-    ],
+      ["00分", "01分", "02分", "03分", "04分", "05分", "06分", "07分", "08分", "09分", "10分", "11分", "12分", "13分", "14分", "15分", "16分", "17分", "18分", "19分", "20分", "21分", "22分", "23分", "24分", "25分", "26分", "27分", "28分", "29分", "30分", "31分", "32分", "33分", "34分", "35分", "36分", "37分", "38分", "39分", "40分", "41分", "42分", "43分", "44分", "45分", "46分", "47分", "48分", "49分", "50分", "51分", "52分", "53分", "54分", "55分", "56分", "57分", "58分", "59分"]],
     time: '选择时间'
   },
 
@@ -67,50 +71,45 @@ Page({
       showmap: 'block'
     })
   },
-  switchExpress:function(){
+  switchExpress: function() {
     console.log(1)
     this.setData({
       typeOfCar: '快车'
     })
   },
-  switchCarPooling: function () {
+  switchCarPooling: function() {
+    var that = this;
     console.log(1)
     this.setData({
       typeOfCar: '拼车'
     })
-    //获取起点
-    netWork.paramsCB({
-      "page": '1',
-    }, function (params) {
-      netWork.httpPOST("/kcv1/user/pcOrderList", params, function (res) {
-        console.log(res)
-      })
-    })
+
     //获取起点
     netWork.paramsCB({
       "token": wx.getStorageSync('token'),
-      "adcode": '310101',
       "from_keyword": '上海'
-    }, function (params) {
-      netWork.httpPOST("/kcv1/user/getRouteStart", params, function (res) {
-        console.log(res)
+    }, function(params) {
+      netWork.httpPOST("/kcv1/user/searchRoute", params, function(res) {
+        that.setData({
+          allResult: res.data.result
+        })
       })
     })
     //获取终点
     netWork.paramsCB({
       "token": wx.getStorageSync('token'),
       "from_id": '25'
-    }, function (params) {
-      netWork.httpPOST("/kcv1/user/getRouteEnd", params, function (res) {
+    }, function(params) {
+      netWork.httpPOST("/kcv1/user/getRouteEnd", params, function(res) {
         console.log(res)
       })
     })
   },
   // 输入框失去焦点事件
   FuncHiddenMap() {
-    var city = this.data.city ;
+    var city = this.data.city;
     wx.navigateTo({
-      url: this.data.typeOfCar == "快车" ? "/pages/destination/destination?city=" + city: "/pages/pooldestination/destination"
+      url: this.data.typeOfCar == "快车" ? "/pages/destination/destination?city=" + city : "/pages/pooldestination/destination"
     })
   },
   // 绑定input输入 
@@ -203,12 +202,6 @@ Page({
         }
       })
     });
-
-
-
-
-
-
   },
 
   toLogin: function() {
@@ -220,7 +213,7 @@ Page({
   },
 
 
-  onLoad: function(option) {
+  onLoad: function(options) {
     var that = this;
     if (app.globalData.userInfo) {
       this.setData({
@@ -250,14 +243,28 @@ Page({
     }
     that.regeocoding();
 
-    //检查一下是否已经有目的地
-    if (option.carflag == 1) {
+    //检查一下是否从快车结果页面过来
+    if (options.carflag == 1) {
       that.setData({
         showCar: 'show'
       })
       var origin = wx.getStorageSync("from_location_gd");
       var destination = wx.getStorageSync("to_location_gd");
       that.getDrivingLine(origin, destination)
+      var origin = wx.getStorageSync("from_location_gd");
+      var destination = wx.getStorageSync("to_location_gd");
+      that.getDrivingLine(origin, destination);
+    }
+
+    //检查一下是否从拼车结果页面过来
+    if (options.carflag == 2) {
+      that.setData({
+        step: 'detail',
+        typeOfCar: '拼车',
+        choiceResult: options,
+        fare: options.fare,
+        singleFare: options.fare
+      })
     }
   },
 
@@ -266,22 +273,25 @@ Page({
    */
   onReady: function() {
     var that = this;
+    var token = wx.getStorageSync('token');
     //查询用户信息
-    netWork.paramsCB({
-      "token": wx.getStorageSync('token')
-    }, function(params) {
-      netWork.httpPOST("/kcv1/user/userInfo", params, function(res) {
-        if (res.code == 0) {
-          that.setData({
-            nicknameImg: res.data.result.head_pic,
-            mycall: res.data.result.mobile,
-            petname: res.data.result.nickname,
-          })
-        } else {
-          alert("网络错误")
-        }
+    if (token) {
+      netWork.paramsCB({
+        "token": token
+      }, function(params) {
+        netWork.httpPOST("/kcv1/user/userInfo", params, function(res) {
+          if (res.code == 0) {
+            that.setData({
+              nicknameImg: res.data.result.head_pic,
+              mycall: res.data.result.mobile,
+              petname: res.data.result.nickname,
+            })
+          } else {
+            alert("网络错误")
+          }
+        })
       })
-    })
+    }
   },
 
   //事件处理函数
@@ -330,8 +340,30 @@ Page({
       url: '../history/history'
     })
   },
-
-
+  bindPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    var singleFare = this.data.singleFare;
+    var index = e.detail.value;
+    this.setData({
+      index: index,
+      fare: singleFare * (index) 
+    })
+  },
+  
+  bindMultiPickerChange: function(e) {
+    var index = e.detail.value;
+    var multiArray = this.data.multiArray;
+    var time = multiArray[0][index[0]] + ' ' + multiArray[1][index[1]] + ' ' + multiArray[2][index[2]];
+    if(index[0]==0){
+      return;
+    }
+    if(index[0]==1){
+        time='现在';
+    }
+    this.setData({
+      time: time
+    })
+  },
   getUserInfo: function(e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
@@ -346,7 +378,21 @@ Page({
       mySwitch: 'block'
     })
   },
+  choiceTarget: function (e) {
+    var that = this;
+    var index = e.currentTarget.dataset.index;
+    var choiceResult = that.data.allResult[index];
+    wx.setStorage({
+      key: "route_id"
+    });
+    that.setData({
+      choiceResult: choiceResult,
+      fare: choiceResult.fare,
+      singleFare: choiceResult.fare,
+      step:'detail'
+    })
 
+  },
   changeSwitch: function(e) {
     if (this.data.mySwitch == 'none') {
       this.setData({
@@ -386,7 +432,7 @@ Page({
           longitude: data[0].longitude,
           address: data[0].name,
           desc: data[0].desc,
-          city:data[0].regeocodeData.addressComponent.district
+          city: data[0].regeocodeData.addressComponent.district
         });
 
         var from_location_gd = that.data.longitude + "," + that.data.latitude;
@@ -404,7 +450,7 @@ Page({
           key: "from_location_gd",
           data: from_location_gd
         });
-     
+
       },
       fail: function(info) {
         //失败回调

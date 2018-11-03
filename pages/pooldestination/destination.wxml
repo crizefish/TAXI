@@ -4,25 +4,25 @@
   <text class='cancel-text' bindtap='toIndex'>取消</text>
   </view>
 
-<scroll-view class='page-body' scroll-y="true">
+<scroll-view class='page-body' scroll-y="true" >
  
- <view class='content-history' bindtap='toIndex'>
+ <view class='content-history' bindtap='choiceTarget' wx:for='{{allResult}}' wx:key="id"  data-index="{{index}}">
           <view class='input-box' style= 'width: 80%'>
             <view class='top-box-history'>
               <view class='circle green-circle'></view>
-              <text class='history-city'>北京市</text>
+              <text class='history-city'>{{item.from_city}}</text>
               <view class='line-split'></view>
-              <text class='history-detail'>大红门</text>
+              <text class='history-detail'>{{item.from_address}}</text>
             </view>
-            <view class='bottom-box-history'>
+            <view class='bottom-box-history' >
               <view class='circle orange-circle'></view>
-              <text class='history-city'>天津市</text>
+              <text class='history-city'>{{item.to_city}}</text>
               <view class='line-split'></view>
-              <text class='history-detail'>宁和郑振富</text>
+              <text class='history-detail'>{{item.to_address}}</text>
             </view>
           </view>
           <view class='for-column'>
-            <text class='orange-text  '>120</text>
+            <text class='orange-text  '>{{item.fare}}</text>
             <text style='font-size:11pt'>元/人</text>
           </view>
         </view>

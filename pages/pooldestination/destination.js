@@ -16,14 +16,15 @@ Page({
     latitude: null,
     longitude: null,
     address: null,
-    desc: null
+    desc: null,
+    allResult:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.searchResult();
+    this.searchResult('上海');
   },
 
   /**
@@ -75,48 +76,13 @@ Page({
 
   },
   choiceTarget: function(e) {
-    var item = e.currentTarget.dataset.item;
-    console.log(e.currentTarget.dataset.location)
-    this.setData({
-      sugResult: []
-
-    })
-
-    //存储路线信息
-    var to_location_gd = item.location;
-    var str = to_location_gd.split(",");
-    var to_location = str[1]+','+str[0]
-    var to_address = item.name + "|||" + item.address;
-
+    var that = this;
+    var index = e.currentTarget.dataset.index;
+    var choiceResult = that.data.allResult[index];
     wx.setStorage({
-      key: "to_location",
-      data: to_location 
+      key: "route_id",
+      data: choiceResult.route_id
     });
-    wx.setStorage({
-      key: "to_address",
-      data: to_address
-    });
-
-    wx.setStorage({
-      key: "to_location_gd",
-      data: to_location_gd
-    });
-    // wx.setStorage({
-    //   key: "from_location",
-    //   data: "31.19863667538746,121.60027899370256"
-    // });
-    // wx.setStorage({
-    //   key: "to_location",
-    //   data: "31.200241933556,121.60184933499"
-    // });
-    // wx.setStorage({
-    //   key: "from_address",
-    //   data: "上海浦东软件园祖冲之园-X座西南198米|||上海市浦东新区X620(金科路)"
-    // });
-    // wx.setStorage({
-    //   key: "to_address",
-    //   data: "印语复印打印店|||上海市浦东新区晨晖路浦东软件园W2座底层"
-    // });
     var token = wx.getStorageSync('token');
     if (token == null || token == "") {
       wx.navigateTo({ //保留当前页面，跳转到应用内的某个页面（最多打开5个页面，之后按钮就没有响应的）
@@ -124,35 +90,44 @@ Page({
       })
     } else {
       wx.navigateTo({
-        url: "/pages/index/index?carflag=1"
+        url: "/pages/index/index?carflag=2"
+          + "&from_city=" + choiceResult.from_city
+          + "&from_address=" + choiceResult.from_address
+          + "&to_city=" + choiceResult.to_city
+          + "&to_address=" + choiceResult.to_address
+          + "&fare=" + choiceResult.fare
       })
     }
   },
   bindKeyInput: function(e) {
-    console.log("e", e.detail.value)
-    if (e.detail.value == null || e.detail.value == '') {
-      return;
-    }
-    this.searchResult(e.detail.value)
+    var that = this;
+    //获取起点
+    netWork.paramsCB({
+      "token": wx.getStorageSync('token'),
+      "to_keyword": e.detail.value
+    }, function (params) {
+      netWork.httpPOST("/kcv1/user/searchRoute", params, function (res) {
+        that.setData({
+          allResult: res.data.result
+        })
+        console.log(that.data.allResult)
+      })
+    })
   },
 
   searchResult: function(str) {
     var that = this;
-    // var key = config.Config.key;
-    var myAmapFun = new amapFile.AMapWX({
-      key: '4f3444ea6fce9a52d068cb97c9f3faf5'
-    });
-    myAmapFun.getInputtips({
-      keywords: str,
-      location: '',
-      success: function(data) {
-        if (data && data.tips) {
-          console.log(data)
-          that.setData({
-            sugResult: data.tips
-          });
-        }
-      }
+    //根据起点搜索
+    netWork.paramsCB({
+      "token": wx.getStorageSync('token'),
+      "from_keyword": str
+    }, function (params) {
+      netWork.httpPOST("/kcv1/user/searchRoute", params, function (res) {
+        that.setData({
+          allResult: res.data.result
+        })
+        console.log(that.data.allResult)
+      })
     })
 
   },
