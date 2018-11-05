@@ -35,11 +35,11 @@
           <view class='input-box'>
             <view class='top-box'>
               <view class='circle green-circle'></view>
-              <input type='text' class='now-position' value='{{address}}'></input>
+              <input type='text' class='now-position' value='{{desc}}'></input>
             </view>
             <view class='top-box bottom-box'>
               <view class='circle orange-circle'></view>
-              <input type="text" bindinput="bindKeyInput" class='now-position' bindfocus="FuncHiddenMap" bindblur="FuncshowMap" placeholder='您要去哪儿' value='{{destination}}'></input>
+              <input type="text" class='now-position' bindfocus="FuncHiddenMap" bindblur="FuncshowMap" placeholder='您要去哪儿' value='{{destination}}'></input>
 
               <view class='chat' style='background-image:url({{chatImg}});display:{{chatShow}}' wx-if="{{hiddenEgg=='show'}}">
                 去：{{whereAreUGoing}}
@@ -85,11 +85,11 @@
           <view class='input-box'>
             <view class='top-box'>
               <view class='circle green-circle'></view>
-              <input type='text' class='now-position' value='{{address}}'></input>
+              <input type='text' class='now-position' value='{{desc}}'></input>
             </view>
             <view class='top-box bottom-box'>
               <view class='circle orange-circle'></view>
-              <input type="text" bindinput="bindKey" class='now-position' bindfocus="FuncHiddenMap" bindblur="FuncshowMap" placeholder='您要去哪儿' value='{{destination}}'></input>
+              <input type="text"  class='now-position' bindfocus="FuncHiddenMap" bindblur="FuncshowMap" placeholder='您要去哪儿' value='{{destination}}'></input>
 
               <view class='chat' style='background-image:url({{chatImg}});display:{{chatShow}}' wx-if="{{hiddenEgg=='show'}}">
                 去：{{whereAreUGoing}}
@@ -156,7 +156,7 @@
           <view class='input-box'>
             <view class='bottom-box-history'>
               <image src='{{aim}}' class='aim'></image>
-              <text style='font-size: 14pt;padding-left:48rpx;'>{{address}}</text>
+              <text style='font-size: 14pt;padding-left:48rpx;'>{{desc}}</text>
             </view>
             <view class='top-box-history'>
               <view class='circle green-circle'></view>
@@ -207,7 +207,7 @@
       </view>
 
       <view class='choice-box-pool' style="padding-bottom:100rpx" wx:if="{{step == 'detail'}}">
-        <button class='to-waitting'>立即拼车</button>
+        <button class='to-waitting' bindtap='sendPoolOrder'>立即拼车</button>
       </view>
     </view>
 

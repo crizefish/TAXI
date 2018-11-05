@@ -37,7 +37,12 @@ Page({
    */
   onLoad: function(options) {
     this.searchResult();
-    that = this
+    that = this;
+    if(options.city!=null && options.city!=''){
+      that.setData({
+        currentCity:options.city
+      })
+    }
   },
   bindMultiPickerChange: function (e) {
     that.setData({
@@ -58,6 +63,10 @@ Page({
           "multiArray[1]": list,
           "multiIndex[0]": e.detail.value,
           "multiIndex[1]": 0
+        });
+
+        that.setData({
+          "currentCity": that.data.multiArray[1][that.data.multiIndex[1]]
         })
 
     }
@@ -171,7 +180,7 @@ Page({
     if (e.detail.value == null || e.detail.value == '') {
       return;
     }
-    var city = this.data.multiArray[1][this.data.multiIndex[1]]
+    var city = this.data.currentCity;
     console.log("city",city)
     this.searchResult(city+e.detail.value)
   },

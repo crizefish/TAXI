@@ -55,13 +55,15 @@ Page({
       from_id: "",
       from_location: "",
     },
-    time:'',
-    fare:0,
-    singleFare:0,
+    time: '',
+    finalTime: -1,
+    fare: 0,
+    singleFare: 0,
     multiArray: [
-      ["选择时间","现在","今天", "明天", "后天"],
-      ["1点", "2点", "3点", "4点", "5点", "6点", "7点", "8点", "9点", "10点", "11点", "12点", "13点", "14点", "15点", "16点", "17点", "18点", "19点", "20点", "21点", "22点", "23点", "24点"],
-      ["00分", "01分", "02分", "03分", "04分", "05分", "06分", "07分", "08分", "09分", "10分", "11分", "12分", "13分", "14分", "15分", "16分", "17分", "18分", "19分", "20分", "21分", "22分", "23分", "24分", "25分", "26分", "27分", "28分", "29分", "30分", "31分", "32分", "33分", "34分", "35分", "36分", "37分", "38分", "39分", "40分", "41分", "42分", "43分", "44分", "45分", "46分", "47分", "48分", "49分", "50分", "51分", "52分", "53分", "54分", "55分", "56分", "57分", "58分", "59分"]],
+      ["选择时间", "现在", "今天", "明天", "后天"],
+      ["0点", "1点", "2点", "3点", "4点", "5点", "6点", "7点", "8点", "9点", "10点", "11点", "12点", "13点", "14点", "15点", "16点", "17点", "18点", "19点", "20点", "21点", "22点", "23点", "24点"],
+      ["00分", "01分", "02分", "03分", "04分", "05分", "06分", "07分", "08分", "09分", "10分", "11分", "12分", "13分", "14分", "15分", "16分", "17分", "18分", "19分", "20分", "21分", "22分", "23分", "24分", "25分", "26分", "27分", "28分", "29分", "30分", "31分", "32分", "33分", "34分", "35分", "36分", "37分", "38分", "39分", "40分", "41分", "42分", "43分", "44分", "45分", "46分", "47分", "48分", "49分", "50分", "51分", "52分", "53分", "54分", "55分", "56分", "57分", "58分", "59分"]
+    ],
     time: '选择时间'
   },
 
@@ -79,15 +81,15 @@ Page({
   },
   switchCarPooling: function() {
     var that = this;
-    console.log(1)
-    this.setData({
+    that.checkLogin();
+    that.setData({
       typeOfCar: '拼车'
     })
 
     //获取起点
     netWork.paramsCB({
       "token": wx.getStorageSync('token'),
-      "from_keyword": '上海'
+      "from_keyword": that.data.city
     }, function(params) {
       netWork.httpPOST("/kcv1/user/searchRoute", params, function(res) {
         that.setData({
@@ -111,39 +113,6 @@ Page({
     wx.navigateTo({
       url: this.data.typeOfCar == "快车" ? "/pages/destination/destination?city=" + city : "/pages/pooldestination/destination"
     })
-  },
-  // 绑定input输入 
-  bindKeyInput: function(e) {
-    console.log("e", e.detail.value)
-    if (e.detail.value == null || e.detail.value == '') {
-      return;
-    }
-    var that = this;
-    // 新建百度地图对象 
-    var BMap = new bmap.BMapWX({
-      ak: '9nxZMWueKmnnnGgrt6Ie7fR3EdjYTD6N'
-    });
-    var fail = function(data) {
-      console.log(data)
-    };
-    var success = function(data) {
-      console.log(data)
-      var sugResult = data.wxMarkerData;
-      that.setData({
-        sugResult: sugResult,
-        hiddenEgg: 'hidden'
-      });
-    }
-    // 发起suggestion检索请求 
-    BMap.search({
-      "query": e.detail.value,
-      fail: fail,
-      success: success,
-      // 此处需要在相应路径放置图片文件 
-      iconPath: '../../img/marker_red.png',
-      // 此处需要在相应路径放置图片文件 
-      iconTapPath: '../../img/marker_red.png'
-    });
   },
 
   choiceAddress: function(e) {
@@ -340,28 +309,63 @@ Page({
       url: '../history/history'
     })
   },
-  bindPickerChange: function (e) {
+  bindPickerChange: function(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     var singleFare = this.data.singleFare;
     var index = e.detail.value;
     this.setData({
       index: index,
-      fare: singleFare * (index) 
+      fare: singleFare * (index)
     })
   },
-  
+
   bindMultiPickerChange: function(e) {
     var index = e.detail.value;
     var multiArray = this.data.multiArray;
+    var finalTime;
+    var now = new Date();
+    var yy = now.getFullYear(); //年
+    var mm = now.getMonth() + 1; //月
+    var dd = now.getDate();
+    parseInt(new Date().getTime() / 1000);
+
     var time = multiArray[0][index[0]] + ' ' + multiArray[1][index[1]] + ' ' + multiArray[2][index[2]];
-    if(index[0]==0){
+    if (index[0] == 0) {
       return;
     }
-    if(index[0]==1){
-        time='现在';
+  
+    //时
+    var hh = index[1];
+    if (hh < 10) hh = "0" + hh;
+    //分
+    var ii = index[2];
+    if (ii < 10) ii = "0" + ii;
+    //时间戳
+    var clock = yy + "/";
+    if (mm < 10) clock += "0";
+    clock += mm + "/";
+    if (dd < 10) clock += "0";
+    clock += dd + " ";
+    clock += hh + ":";
+    clock += ii + ":";
+    clock += '00'
+    console.log(clock)
+    var timestamp = new Date(clock).getTime() / 1000;
+    console.log('timestamp', timestamp)
+
+    if (index[0] == 2) {
+      finalTime = timestamp + 86400;
+    }
+    if (index[0] == 3) {
+      finalTime = timestamp + 86400 * 2;
+    }
+    if (index[0] == 1) {
+      time = '现在';
+      finalTime = 0;
     }
     this.setData({
-      time: time
+      time: time,
+      finalTime: finalTime,
     })
   },
   getUserInfo: function(e) {
@@ -378,7 +382,7 @@ Page({
       mySwitch: 'block'
     })
   },
-  choiceTarget: function (e) {
+  choiceTarget: function(e) {
     var that = this;
     var index = e.currentTarget.dataset.index;
     var choiceResult = that.data.allResult[index];
@@ -389,7 +393,7 @@ Page({
       choiceResult: choiceResult,
       fare: choiceResult.fare,
       singleFare: choiceResult.fare,
-      step:'detail'
+      step: 'detail'
     })
 
   },
@@ -427,12 +431,14 @@ Page({
     });
     myAmapFun.getRegeo({
       success: function(data) {
+        var city = data[0].regeocodeData.addressComponent.city;
+        var province = data[0].regeocodeData.addressComponent.province;
         that.setData({
           latitude: data[0].latitude,
           longitude: data[0].longitude,
           address: data[0].name,
           desc: data[0].desc,
-          city: data[0].regeocodeData.addressComponent.district
+          city: city==''?province:city
         });
 
         var from_location_gd = that.data.longitude + "," + that.data.latitude;
@@ -457,9 +463,36 @@ Page({
         console.log(info)
       }
     });
+  },
 
-
-
+  sendPoolOrder: function() {
+    var that = this;
+    var warnStr = [];
+    if (that.data.index === 0) {
+      warnStr.push("请选择乘坐人数！")
+    }
+    if (that.data.finalTime === -1) {
+      warnStr.push("请选择出发时间！")
+    }
+    if(warnStr.length!=0){
+        wx.showModal({
+          title: warnStr[0],
+        })
+    }else{
+      netWork.paramsCB({
+        "route_id": wx.getStorageSync('route_id'),
+        "start_time": that.data.finalTime,
+        "people": that.data.index,
+        "user_location": wx.getStorageSync('from_location'),
+        "user_address": wx.getStorageSync('from_address'),
+        "token": wx.getStorageSync('token')
+      }, function (params) {
+        netWork.httpPOST("/kcv1/user/sendPc", params, function (res) {
+        
+        console.log(res)
+          })
+        })
+    }
   },
   getDrivingLine: function(origin, destination) {
     var that = this;

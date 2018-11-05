@@ -1,7 +1,7 @@
 <view class='title'>
   <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
     <view class="picker">
-      <view class='city'>{{multiArray[1][multiIndex[1]]=='北京' ? '上海': multiArray[1][multiIndex[1]]}}</view>
+      <view class='city'>{{multiArray[1][multiIndex[1]]=='北京' ? currentCity: multiArray[1][multiIndex[1]]}}</view>
       <view class='picker-sign'></view>
     </view>
   </picker>

@@ -6,7 +6,7 @@
   flex-direction: column;
 }
 .city{
-  width: 100rpx;
+  width: 120rpx;
 }
 .title{
    display:flex; 
