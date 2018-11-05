@@ -55,13 +55,14 @@ Page({
       from_id: "",
       from_location: "",
     },
-    time:'',
-    fare:0,
-    singleFare:0,
+    time: '',
+    fare: 0,
+    singleFare: 0,
     multiArray: [
-      ["选择时间","现在","今天", "明天", "后天"],
+      ["选择时间", "现在", "今天", "明天", "后天"],
       ["1点", "2点", "3点", "4点", "5点", "6点", "7点", "8点", "9点", "10点", "11点", "12点", "13点", "14点", "15点", "16点", "17点", "18点", "19点", "20点", "21点", "22点", "23点", "24点"],
-      ["00分", "01分", "02分", "03分", "04分", "05分", "06分", "07分", "08分", "09分", "10分", "11分", "12分", "13分", "14分", "15分", "16分", "17分", "18分", "19分", "20分", "21分", "22分", "23分", "24分", "25分", "26分", "27分", "28分", "29分", "30分", "31分", "32分", "33分", "34分", "35分", "36分", "37分", "38分", "39分", "40分", "41分", "42分", "43分", "44分", "45分", "46分", "47分", "48分", "49分", "50分", "51分", "52分", "53分", "54分", "55分", "56分", "57分", "58分", "59分"]],
+      ["00分", "01分", "02分", "03分", "04分", "05分", "06分", "07分", "08分", "09分", "10分", "11分", "12分", "13分", "14分", "15分", "16分", "17分", "18分", "19分", "20分", "21分", "22分", "23分", "24分", "25分", "26分", "27分", "28分", "29分", "30分", "31分", "32分", "33分", "34分", "35分", "36分", "37分", "38分", "39分", "40分", "41分", "42分", "43分", "44分", "45分", "46分", "47分", "48分", "49分", "50分", "51分", "52分", "53分", "54分", "55分", "56分", "57分", "58分", "59分"]
+    ],
     time: '选择时间'
   },
 
@@ -340,25 +341,25 @@ Page({
       url: '../history/history'
     })
   },
-  bindPickerChange: function (e) {
+  bindPickerChange: function(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     var singleFare = this.data.singleFare;
     var index = e.detail.value;
     this.setData({
       index: index,
-      fare: singleFare * (index) 
+      fare: singleFare * (index)
     })
   },
-  
+
   bindMultiPickerChange: function(e) {
     var index = e.detail.value;
     var multiArray = this.data.multiArray;
     var time = multiArray[0][index[0]] + ' ' + multiArray[1][index[1]] + ' ' + multiArray[2][index[2]];
-    if(index[0]==0){
+    if (index[0] == 0) {
       return;
     }
-    if(index[0]==1){
-        time='现在';
+    if (index[0] == 1) {
+      time = '现在';
     }
     this.setData({
       time: time
@@ -378,7 +379,7 @@ Page({
       mySwitch: 'block'
     })
   },
-  choiceTarget: function (e) {
+  choiceTarget: function(e) {
     var that = this;
     var index = e.currentTarget.dataset.index;
     var choiceResult = that.data.allResult[index];
@@ -389,7 +390,7 @@ Page({
       choiceResult: choiceResult,
       fare: choiceResult.fare,
       singleFare: choiceResult.fare,
-      step:'detail'
+      step: 'detail'
     })
 
   },
