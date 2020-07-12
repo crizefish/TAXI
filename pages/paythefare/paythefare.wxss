@@ -1,0 +1,559 @@
+/* pages/paythefare/paythefare.wxss */
+.page-body{
+  background: #f5f5f7;
+}
+
+.message-box{
+  display: flex;
+  flex-direction: column;
+  padding-left: 16rpx;
+  padding-right: 16rpx;
+}
+
+.driver-box{
+  margin-top: 13rpx;
+  padding:30rpx 5rpx 8rpx 5rpx;
+  box-sizing: border-box;
+  background: #fff;
+  border: 1px solid #e1e1e1;
+  border-radius: 3px;
+}
+
+.driver-message{
+  border-bottom: 1px solid #e1e1e1;
+  display: flex;
+  width: 100%;
+  padding-bottom: 20rpx;
+}
+
+.driver-image-style{
+  margin-right: 28rpx;
+}
+
+.car-box,.driver{
+  width: 50%;
+}
+
+.driver{
+  display: flex;
+  flex-direction: row;
+  padding-left: 30rpx;
+  box-sizing: border-box;
+}
+
+.driver-name{
+  color: #010101;
+  font-size: 14pt;
+  padding-top:17rpx;
+  margin-bottom: 5rpx;
+}
+
+.license{
+  font-size: 12pt;
+  margin-bottom: 15rpx;
+  padding-top: 10rpx;
+  box-sizing: border-box;
+  color: #010101;
+}
+
+.evaluate{
+  display: flex;
+  flex-direction: column;
+}
+
+.call-driver{
+  width: 42rpx;
+  height: 42rpx;
+  margin-right: -145rpx
+}
+
+.car-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*位置信息*/
+.position-box{
+  padding:23rpx 30rpx 17rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+}
+
+.dot{
+  display: flex;
+  flex-direction: column;
+  width: 16rpx;
+  margin-top: 20rpx;
+}
+
+.green,.red{
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 25rpx;
+}
+
+.green{
+  background: #00c594;
+}
+
+.red{
+  background: #f68e4f;
+}
+
+.line{
+  width: 2rpx;
+  height: 55rpx;
+  background: #c7c7c9;
+  margin-top: 3rpx;
+  margin-bottom: 3rpx;
+  margin-left:8rpx;
+}
+
+.detail-pos{
+  display: flex;
+  flex-direction: column;
+  padding-left: 25rpx;
+}
+
+.current-pos,.destination{
+  color: #515151;
+  font-size: 12pt;
+  line-height: 66rpx;
+}
+
+.pay-title-c{
+  display: flex;
+  flex-direction: row;
+  font-size: 12pt;
+  align-items: baseline;
+  padding: 15rpx 20rpx 20rpx;
+  color: #58585a;
+}
+
+.howmuch{
+  font-size: 25pt;
+  padding-left: 30rpx;
+  padding-right: 20rpx;
+  color: #000;
+}
+
+.quick{
+  padding: 30rpx 37rpx 17rpx 27rpx ;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  font-size: 12pt;
+}
+
+.title{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.bottom-line{
+  width: 238rpx;
+  border-bottom: 1px solid #e8e8e8;
+  display: flex;
+  align-self: center;
+} 
+
+.about-trip{
+  padding-top: 32rpx;
+  padding-left: 19rpx;
+  padding-right: 12rpx;
+  box-sizing: border-box;
+  padding-bottom: 20rpx;
+}
+
+.item{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+  flex-direction: row;
+  align-items: center;
+}
+
+.item:nth-child(3){
+  margin-bottom: 0rpx;
+}
+
+.starting-price{
+  color: #b5b5b5;
+}
+
+.methods{
+  padding-top: 0;
+}
+
+.pay-image{
+  width: 68rpx;
+  height: 68rpx;
+  margin-right: 21rpx;
+}
+
+.selected{
+  width: 26rpx;
+  height: 26rpx;
+}
+
+.pay-pay{
+  display: flex;
+  align-items: center;
+}
+
+.pay-button{
+  margin-top: 10rpx;
+  width: 100%;
+  background-color: #4a4c59;
+  color: #ffffff;
+  margin-bottom: 10rpx;
+}
+
+.btn-box{
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/*隐藏滚动条*/
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+page .pay {
+
+ display: flex;
+
+ flex-direction: column;
+
+ background: #fff;
+
+}
+
+ 
+
+page .pay .title {
+
+ height: 90rpx;
+
+ line-height: 90rpx;
+
+ font-size: 28rpx;
+
+ color: #353535;
+
+ padding: 0 23rpx;
+
+ border-bottom: 1rpx solid #ddd;
+
+ box-sizing: border-box;
+
+}
+
+ 
+
+page .pay .wx_pay, page .pay .offline_pay, page .pay .wallet_pay {
+
+ margin: 0 26rpx;
+
+ height: 90rpx;
+
+ line-height: 90rpx;
+
+ border-bottom: 2rpx solid #ddd;
+
+ box-sizing: border-box;
+
+ display: flex;
+
+ align-items: center;
+
+ justify-content: flex-start;
+
+}
+
+ 
+
+page .pay .wx_pay .icon, page .pay .offline_pay .icon,
+
+page .pay .wallet_pay .icon {
+
+ width: 34rpx;
+
+ height: 34rpx;
+
+ border: 2rpx solid #ddd;
+
+ box-sizing: border-box;
+
+ border-radius: 50%;
+
+}
+
+ 
+
+page .pay .wx_pay .icon.active, page .pay .offline_pay .icon.active,
+
+page .pay .wallet_pay .icon.active {
+
+ border: 10rpx solid #00a2ff;
+
+}
+
+ 
+
+page .pay .wx_pay text, page .pay .offline_pay text, page .pay .wallet_pay text {
+
+ margin-left: 20rpx;
+
+ color: #353535;
+
+ font-size: 26rpx;
+
+}
+
+ 
+
+page .pay .wallet_pay {
+
+ border: 0;
+
+ border-top: 2rpx solid #ddd;
+
+}
+
+ 
+
+page .pay .offline_pay {
+
+ border: 0 none;
+
+}
+
+ 
+
+page .save {
+
+ margin: 80rpx 23rpx;
+
+ color: #fff;
+
+ background: #00a2ff;
+
+ height: 88rpx;
+
+ line-height: 88rpx;
+
+ text-align: center;
+
+ font-size: 30rpx;
+
+ border-radius: 10rpx;
+
+}
+
+ 
+
+page .wallets-password {
+
+ position: absolute;
+
+ left: 0;
+
+ top: 0;
+
+ width: 100%;
+
+ height: 550%;
+
+ background: rgba(0, 0, 0, 0.6);
+
+}
+
+ 
+
+page .wallets-password .input-content-wrap {
+
+ position: absolute;
+
+ top: 200rpx;
+
+ left: 50%;
+
+ display: flex;
+
+ flex-direction: column;
+
+ width: 600rpx;
+
+ margin-left: -300rpx;
+
+ background: #fff;
+
+ border-radius: 20rpx;
+
+}
+
+ 
+
+page .wallets-password .input-content-wrap .top {
+
+ display: flex;
+
+ align-items: center;
+
+ height: 90rpx;
+
+ border-bottom: 2rpx solid #ddd;
+
+ justify-content: space-around;
+
+}
+
+ 
+
+page .wallets-password .input-content-wrap .top .close {
+
+ font-size: 44rpx;
+
+ color: #999;
+
+ font-weight: 100;
+
+}
+
+ 
+
+page .wallets-password .input-content-wrap .top .forget {
+
+ color: #00a2ff;
+
+ font-size: 22rpx;
+
+}
+
+ 
+
+page .wallets-password .input-content-wrap .actual_fee {
+
+ display: flex;
+
+ align-items: center;
+
+ justify-content: center;
+
+ color: #000;
+
+ height: 100rpx;
+
+ margin: 0 23rpx;
+
+ border-bottom: 2rpx solid #ddd;
+
+}
+
+ 
+
+page .wallets-password .input-content-wrap .actual_fee span {
+
+ font-size: 24rpx;
+
+}
+
+ 
+
+page .wallets-password .input-content-wrap .actual_fee text {
+
+ font-size: 36rpx;
+
+}
+
+ 
+
+page .wallets-password .input-content-wrap .input-password-wrap {
+
+ display: flex;
+
+ align-items: center;
+
+ justify-content: center;
+
+ height: 150rpx;
+
+}
+
+ 
+
+page .wallets-password .input-content-wrap .input-password-wrap .password_dot {
+
+ display: flex;
+
+ align-items: center;
+
+ justify-content: center;
+
+ text-align: center;
+
+ color: #000;
+
+ box-sizing: border-box;
+
+ width: 90rpx;
+
+ height: 90rpx;
+
+ border: 2rpx solid #ddd;
+
+ border-left: none 0;
+
+}
+
+ 
+
+page .wallets-password .input-content-wrap .input-password-wrap .password_dot:nth-child(1) {
+
+ border-left: 2rpx solid #ddd;
+
+}
+
+ 
+
+page .wallets-password .input-content-wrap .input-password-wrap .password_dot i {
+
+ background: #000;
+
+ border-radius: 50%;
+
+ width: 20rpx;
+
+ height: 20rpx;
+
+}
+
+ 
+
+page .wallets-password .input-content {
+position: absolute;
+
+ opacity: 0;
+
+ left: -100%;
+
+ top: 600rpx;
+
+ background: #f56;
+
+ z-index: -999;
+}
+
+ 
+
+page .wallets-password .input-content.active {
+
+ z-index: -99;
+
+}

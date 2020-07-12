@@ -1,4 +1,13 @@
 /**app.wxss**/
+
+.page-body{
+  position: fixed; 
+  height: 100%; 
+  width: 100%; 
+  display:flex; 
+  flex-direction: column;
+}
+
 .container {
   height: 100%;
   display: flex;
@@ -7,3 +16,57 @@
   justify-content: space-between;
   box-sizing: border-box;
 } 
+
+/* 主题橘色*/
+.orange{
+  color: #ff7100;
+}
+
+/* 轿车的样式*/
+.car-image-style{
+  width: 62rpx;
+  height: 116rpx;
+}
+
+/* 当前位置的样式*/
+.now-position-image-style{
+  width: 94rpx;
+  height: 94rpx;
+}
+
+
+/* 每个页面下方信息的外部容器，与左右两边产生15rpx空隙*/
+.bottom-message-box{
+  width: 100%;
+  display: flex;
+  position: absolute;
+  bottom: 26px;
+  padding-left: 15rpx;
+  padding-right: 15rpx;
+  box-sizing: border-box;
+  justify-content: center;
+}
+
+/*司机努力赶来图*/
+.driver-img-style{
+  width: 52rpx;
+  height: 54rpx;
+}
+
+/*司机照片*/
+.driver-image-style{
+  width: 104rpx;
+  height: 104rpx;
+}
+
+/* 评价的星星*/
+.star{
+  width: 28rpx;
+  height: 28rpx;
+}
+
+/*电话图片*/
+.phone-img{
+  width: 26rpx;
+  height: 26rpx;
+}

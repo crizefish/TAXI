@@ -1,49 +1,222 @@
 <view class='page-body'>
-  <view class='container-box'>
-    <view class='img-box'>
-      <image src='{{btn_user2x}}' class='img-user'></image>
-    </view>
-    <view class='type-of-car'>
-      <button class='express car-text'>快车</button>
-      <button class='carpooling car-text'>拼车</button>
-    </view>
-    <map id="map" longitude="113.324520" latitude="23.099994" scale="18" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location style="width: 100%; height: 600px;">
-    </map>
-    <view class='choice-box'>
-      <view class='content'>
-        <view class='now'>现在</view>
-        <view class='input-box'>
-          <view class='top-box'>
-            <view class='circle green-circle'></view>
-            <input type='text' class='now-position' value='{{nowPosition}}'></input>
-          </view>
-          <view class='top-box bottom-box'>
-            <view class='circle orange-circle'></view>
-            <input type='text' class='now-position' placeholder='您要去哪儿' value='{{destination}}'></input>
-            <view class='chat' style='background-image:url({{chatImg}})'>
-              去：{{whereAreUGoing}} 
-              <icon type="clear" size="20"/>
-            </view>
-          </view>
+  <view class='mymessage' style='display:{{mySwitch}}' bindtap='changeSwitch'>
+    <view class='phonumber' catchtap='longShow'>
+      <view class='nickname'>
+        <image src='{{nicknameImg}}' class='headportrait'></image>
+        <text class="mycall">{{mycall}}</text>
+        <text class='petname' catchtap='toLogin'>{{petname}}</text>
+      </view>
+      <view class='bottom-box1 operation-list'>
+        <view class='row-box'>
+          <image src='{{TravelItinerary}}' class='travel-itinerary'></image>
+          <text class='travel-text' catchtap='tripList'>行程</text>
         </view>
-        <view class='aim-box'>
-          <image class='aim' src='{{aim}}'></image>
-        </view>
-        <view class='enlargemen-and-reduction-box'>
-          <view class='oprate add'>+</view>
-          <view class='oprate'>一</view>
-        </view>
-        <view class='path'>
-          <image class='path-of-car' src='{{pathOfCar}}'></image>
-        </view>
-        <view class='get-on-the-car'>
-          <view class='get-on-the-car-img' style='background-image:url({{getOnTheCar}})'>
-            <view class='time-wait'>{{timeWait}}</view>
-            <view>上车</view>
-          </view>
+        <view class='row-box'>
+          <image src='{{tool}}' class='travel-itinerary'></image>
+          <text class='travel-text' catchtap='logout'>退出</text>
         </view>
       </view>
     </view>
   </view>
+  <view class='container-box'>
+    <view class='img-box'>
+      <image src='{{btn_user2x}}' class='img-user' bindtap='changeSwitch'></image>
+    </view>
+    <view class='type-of-car'>
+      <button class='{{(typeOfCar=="出租车"?"express":"carpooling")+" car-text"}}' bindtap='switchExpress'>出租车</button>
+      <button class='{{(typeOfCar=="合乘"?"express":"carpooling")+" car-text"}}' bindtap='switchCarPooling'>合乘</button>
+    </view>
+    <!-- 出租车 -->
+    <view wx:if="{{typeOfCar=='出租车'}}">
+      <!-- <map id="navi_map" scale="14" markers="{{markers}}" polyline="{{polyline}}" latitude='{{latitude}}' longitude='{{longitude}}' style="width:100%;height:{{heightOfMap}}vh;display:{{showmap}}" show-location='true'></map> -->
+      <map id="navi_map" longitude="{{longitude}}" latitude="{{latitude}}" scale="14" controls="{{controls}}" markers="{{markers}}" bindcontroltap="controltap" polyline="{{polyline}}" bindmarkertap="markertap" circles="{{circles}}" style="width:100%;height:{{heightOfMap}}vh;display:{{showmap}}"
+        bindregionchange="regionchange"
+        show-location='true'>
+      </map>
+        <cover-view class='aim-from-img' style='display:{{showmap}}'>
+            <cover-image class='from-img ' src='{{fromImg}}'></cover-image>
+          </cover-view>
+      <view class='choice-box'>
+        <view class='content' wx:if="{{showCar=='hide'}}">
+          <view class='now'>现在</view>
+          <view class='input-box'>
+            <view class='top-box'>
+              <view class='circle green-circle'></view>
+              <input type='text' class='now-position' value='{{desc}}'></input>
+            </view>
+            <view class='top-box bottom-box'>
+              <view class='circle orange-circle'></view>
+              <input type="text" class='now-position' bindfocus="FuncHiddenMap" bindblur="FuncshowMap" placeholder='您要去哪儿' value='{{destination}}'></input>
 
+              <view class='chat' style='background-image:url({{chatImg}});display:{{chatShow}}' wx-if="{{hiddenEgg=='show'}}">
+                去：{{whereAreUGoing}}
+              </view>
+            </view>
+          </view>
+          <cover-view class='aim-box' bindtap='clear'>
+            <cover-image class='aim' src='{{aim}}' bindtap='my_location'></cover-image>
+          </cover-view>
+          <!-- <view class='path'>
+            <image class='path-of-car' src='{{pathOfCar}}' style='display:{{showmap}}'></image>
+          </view> -->
+          <view class='get-on-the-car' style='display:{{showmap}}'>
+            <view class='get-on-the-car-img' style='background-image:url({{getOnTheCar}});'>
+              <view class='time-wait'>{{timeWait}}</view>
+              <view>上车</view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class='car-show' wx:if="{{showCar=='show'}}">
+        <view class='remove-address'>
+          <text style='remove-address' bindtap='removeAddress'>✕</text>
+        </view>
+        <image src='{{carSign}}' class='car-sign'></image>
+        <view class='count-money'>
+          <text style='font-size:12pt' wx:if="{{distanceStr}}">行程约</text>
+          <text wx:if="{{distanceStr}}">{{distanceStr}}</text>
+          <text style='font-size:12pt' wx:if="{{distanceStr}}">公里，</text>
+          <text style='font-size:12pt'>预计</text>
+          <text>{{prePrices}}</text>
+          <text style='font-size:12pt'>元</text>
+        </view>
+        <button class='to-waitting' bindtap='checkNearDriver'>呼叫出租车</button>
+      </view>
+    </view>
+
+    <!-- 合乘 -->
+    <scroll-view scroll-y="true" style='padding-bottom:300rpx;height:1400rpx;width:100%; overflow:scroll;' wx:if="{{typeOfCar=='合乘'}}">
+      <view class='choice-box-pool' wx:if="{{step == 'choice'}}">
+        <view class='content-pool' style='margin-bottom:10rpx'>
+          <view class='input-box'>
+            <view class='top-box'>
+              <view class='circle green-circle'></view>
+              <input type='text' class='now-position' value='{{descPool}}' bindtap='toPoolOrign'></input>
+            </view>
+            <view class='top-box bottom-box'>
+              <view class='circle orange-circle'></view>
+              <input type="text" class='now-position' bindfocus="FuncHiddenMap" bindblur="FuncshowMap" placeholder='您要去哪儿' value='{{destination}}'></input>
+
+              <view class='chat' style='background-image:url({{chatImg}});display:{{chatShow}}' wx-if="{{hiddenEgg=='show'}}">
+                去：{{whereAreUGoing}}
+              </view>
+            </view>
+          </view>
+        </view>
+        <scroll-view scroll-y="true" style='padding-bottom:300rpx;height:700rpx;width:100%; overflow:scroll;'>
+          <view class='line-title'>
+            <image class='star' src="{{star}}"></image>
+            <text class='title-text'>历史线路</text>
+          </view>
+          <view class='content-history' bindtap='choiceTarget' data-index="0">
+            <view class='input-box' style='width: 80%'>
+              <view class='top-box-history'>
+                <view class='circle green-circle'></view>
+                <text class='history-city'>{{allResult[0].from_city}}</text>
+                <view class='line-split'></view>
+                <text class='history-detail'>{{allResult[0].from_address}}</text>
+              </view>
+              <view class='bottom-box-history'>
+                <view class='circle orange-circle'></view>
+                <text class='history-city'>{{allResult[0].to_city}}</text>
+                <view class='line-split'></view>
+                <text class='history-detail'>{{allResult[0].to_address}}</text>
+              </view>
+            </view>
+            <view class='for-column'>
+              <text class='orange-text  '>{{allResult[0].fare}}</text>
+              <text style='font-size:11pt'>元/人</text>
+            </view>
+          </view>
+
+          <view class='line-title'>
+            <image class='star' src="{{star}}"></image>
+            <text class='title-text'>全部线路</text>
+          </view>
+          <view class='content-history' bindtap='choiceTarget' wx:for='{{allResult}}' wx:key="id" data-index="{{index}}">
+            <view class='input-box' style='width: 80%'>
+              <view class='top-box-history'>
+                <view class='circle green-circle'></view>
+                <text class='history-city'>{{item.from_city}}</text>
+                <view class='line-split'></view>
+                <text class='history-detail'>{{item.from_address}}</text>
+              </view>
+              <view class='bottom-box-history'>
+                <view class='circle orange-circle'></view>
+                <text class='history-city'>{{item.to_city}}</text>
+                <view class='line-split'></view>
+                <text class='history-detail'>{{item.to_address}}</text>
+              </view>
+            </view>
+            <view class='for-column'>
+              <text class='orange-text  '>{{item.fare}}</text>
+              <text style='font-size:11pt'>元/人</text>
+            </view>
+          </view>
+        </scroll-view>
+      </view>
+
+      <scroll-view scroll-y="true" style='padding-bottom:300rpx;height:1000rpx;width:100%; overflow:scroll;'>
+
+        <view class='choice-box-pool' wx:if="{{step == 'detail'}}">
+          <view class='content-pool'>
+            <view class='input-box'>
+              <view class='bottom-box-history'>
+                <image src='{{aim}}' class='aim'></image>
+                <text style='font-size: 14pt'>{{desc}}</text>
+              </view>
+              <view class='top-box-history'>
+                <view class='circle green-circle'></view>
+                <text class='history-city'>{{choiceResult.from_city}}</text>
+                <view class='line-split'></view>
+                <text class='history-detail'>{{choiceResult.from_address}}</text>
+              </view>
+              <view class='bottom-box-history' style=' border-bottom: 1px solid #cccccc;'>
+                <view class='circle orange-circle'></view>
+                <text class='history-city'>{{choiceResult.to_city}}</text>
+                <view class='line-split'></view>
+                <text class='history-detail'>{{choiceResult.to_address}}</text>
+              </view>
+              <view class='bottom-box-history space-around'>
+                <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                  <view class="title-text">
+                    <image src='{{people}}' class='people'></image>
+                    {{array[index]}}
+                  </view>
+                </picker>
+                <picker mode="multiSelector" bindchange="bindMultiPickerChange" value="{{multiIndex}}" range="{{multiArray}}">
+                  <view class="title-text">
+                    <image src='{{timeImg}}' class='people'></image>
+                    {{time}}
+                  </view>
+                </picker>
+                <view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class='choice-box-pool' wx:if="{{step == 'detail'}}">
+          <view class='content-pool'>
+            <view class='input-box'>
+              <view class='bottom-box-remark'>
+                <text class='remark-text'>共约</text>
+                <text style='color:#ff8901;font-size:20pt'>{{fare}}</text>
+                <text class='remark-text'>元</text>
+              </view>
+              <view class='bottom-box-remark'>
+                <text class='remark-text'>拼单是预约制,发单后请耐心等待车主接单</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class='choice-box-pool' style="padding-bottom:150rpx;padding-top:0rpx" wx:if="{{step == 'detail'}}">
+          <button class='to-waitting' bindtap='sendPoolOrder'>立即合乘</button>
+        </view>
+      </scroll-view>
+
+    </scroll-view>
+
+  </view>
 </view>

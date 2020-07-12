@@ -1,0 +1,34 @@
+<view class='page-body'>
+  <map class="map" id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="14" show-location="true" markers="{{markers}}" bindmarkertap="makertap" style="width:100%;height:20vh;"></map>
+  <view class='container-box'>
+    <view class='evaluate-box'>
+      <!-- 标题 -->
+      <view class='title'>
+        <image class='close-img' src='{{close}}' bindtap='toLogin'></image>
+        <text>评价</text>
+      </view>
+      <view wx:if="{{content == 'before'}}">
+        <!-- 打分 -->
+        <view class='stars-box'>
+          <image class='star' src='{{starNum > index? yellow:gray}}' wx:for="{{5}}" wx:key="id" bindtap="changeStarNum" data-index="{{index}}"></image>
+        </view>
+        <view class='praise-box'>
+          <text>{{praise[starNum-1].tell}}</text>
+        </view>
+        <!-- 评价按钮 -->
+        <view class='btn-home'>
+          <button class="{{islight=='车内整洁'?'orange':''}}" id="车内整洁" data-hi="WeChat" bindtap='changeIsLight'>车内整洁</button>
+          <button class="{{islight=='活地图认路准'?'orange':''}}" id="活地图认路准" data-hi="WeChat" bindtap='changeIsLight'>活地图认路准</button>
+          <button class="{{islight=='驾驶平稳'?'orange':''}}" id="驾驶平稳" data-hi="WeChat" bindtap='changeIsLight'>驾驶平稳</button>
+          <button class="{{islight=='态度好服务棒'?'orange':''}}" id="态度好服务棒" data-hi="WeChat" bindtap='changeIsLight'>态度好服务棒</button>
+          <input type='text' placeholder='其他想说的(将匿名并延迟告诉司机)' class='input-box' auto-focus bindinput='otherInfoInput'></input>
+          <button class='anonymous' bindtap='commitEvaluate'>匿名提交</button>
+        </view>
+      </view>
+      <view class='done-sign-box' wx:if="{{content == 'after'}}" bindtap='toIndex'>
+      <image class='done-sign' src="{{doneSign}}"></image>
+      <text class='done-text'>感谢评价</text>
+      </view>
+    </view>
+  </view>
+</view>

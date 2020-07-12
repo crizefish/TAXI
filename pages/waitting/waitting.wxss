@@ -50,8 +50,8 @@ icon{
   background: #fff;
   border-radius: 40rpx;
   position: absolute;
-  top: 80rpx;
-  left: 140rpx;
+  top: 520rpx;
+  left: 170rpx;
   font-size: 9pt;
   display: flex;
   justify-content: center;

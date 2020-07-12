@@ -1,0 +1,16 @@
+<!--pages/waitting/waitting.wxml-->
+<view class='page-body'>
+        <map class="map" id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="14" show-location="true" markers="{{markers}}" bindmarkertap="makertap" style="width:100%;height:88vh;"></map> 
+      <view class='get-on-the-car'>
+        <view class='get-on-the-car-img'>
+          <view class='up-and-down'>
+              <view class='time-wait-string'>等待</view>
+              <view class='time-wait-number'>{{time}}</view>
+          </view>
+        <view class='watting-text'>正在为您寻找车辆</view>
+        </view> 
+      </view>
+    <view class='cancel-box' bindtap='confirmCancel'>
+      <view class='cancel-text'><icon type="clear" size="18" color='#666666'/> 取消订单</view>
+    </view>
+</view>

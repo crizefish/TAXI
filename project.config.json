@@ -11,8 +11,8 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.9.98",
-	"appid": "wx6e1c390d1d14beff",
+	"libVersion": "2.0.4",
+	"appid": "wx8c8991f86b4e43bb",
 	"projectname": "TAXI",
 	"isGameTourist": false,
 	"condition": {

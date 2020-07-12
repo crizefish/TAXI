@@ -1,0 +1,141 @@
+<view class='page-body'>
+  <view class='container-box'>
+    <view class='img-box'>
+      <image src='{{btn_user2x}}' class='img-user' bindtap='changeSwitch'></image>
+    </view>
+    <view class='type-of-car'>
+      <button class='express car-text' bindtap='switchCarType'>快车</button>
+      <button class='carpooling car-text' bindtap='switchCarType'>拼车</button>
+    </view>
+
+    <view class='choice-box' wx:if="{{step == 'choice'}}">
+      <view class='content'>
+        <view class='input-box'>
+          <view class='top-box'>
+            <view class='circle green-circle'></view>
+            <input type='text' class='now-position' value='{{address}}'></input>
+          </view>
+          <view class='top-box bottom-box'>
+            <view class='circle orange-circle'></view>
+            <input type="text" bindinput="bindKeyInput" class='now-position' bindfocus="FuncHiddenMap" bindblur="FuncshowMap" placeholder='您要去哪儿' value='{{destination}}'></input>
+
+            <view class='chat' style='background-image:url({{chatImg}});display:{{chatShow}}' wx-if="{{hiddenEgg=='show'}}">
+              去：{{whereAreUGoing}}
+            </view>
+          </view>
+        </view>
+      </view>
+      <scroll-view scroll-y="true">
+        <view class='line-title'>
+          <image class='star' src="{{star}}"></image>
+          <text class='title-text'>历史线路</text>
+        </view>
+        <view class='content-history'>
+          <view class='input-box' style='width: 80%'>
+            <view class='top-box-history'>
+              <view class='circle green-circle'></view>
+              <text class='history-city'>北京市</text>
+              <view class='line-split'></view>
+              <text class='history-detail'>大红门</text>
+            </view>
+            <view class='bottom-box-history'>
+              <view class='circle orange-circle'></view>
+              <text class='history-city'>天津市</text>
+              <view class='line-split'></view>
+              <text class='history-detail'>宁和郑振富</text>
+            </view>
+          </view>
+          <view class='for-column'>
+            <text class='orange-text  '>120</text>
+            <text style='font-size:11pt'>元/人</text>
+          </view>
+        </view>
+
+        <view class='line-title'>
+          <image class='star' src="{{star}}"></image>
+          <text class='title-text'>全部线路</text>
+        </view>
+        <view class='content-history'>
+          <view class='input-box' style='width: 80%'>
+            <view class='top-box-history'>
+              <view class='circle green-circle'></view>
+              <text class='history-city'>北京市</text>
+              <view class='line-split'></view>
+              <text class='history-detail'>大红门</text>
+            </view>
+            <view class='bottom-box-history'>
+              <view class='circle orange-circle'></view>
+              <text class='history-city'>天津市</text>
+              <view class='line-split'></view>
+              <text class='history-detail'>的成分VS</text>
+            </view>
+          </view>
+          <view class='for-column'>
+            <text class='orange-text  '>10</text>
+            <text style='font-size:11pt'>元/人</text>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+
+
+    <view class='choice-box' wx:if="{{step != 'detail'}}">
+      <view class='content'>
+        <view class='input-box'>
+          <view class='bottom-box-history'>
+            <image src='{{aim}}' class='aim'></image>
+            <text style='font-size: 14pt;padding-left:48rpx;'>当前位置</text>
+          </view>
+          <view class='top-box-history'>
+            <view class='circle green-circle'></view>
+            <text class='history-city'>北京市</text>
+            <view class='line-split'></view>
+            <text class='history-detail'>大红门</text>
+          </view>
+          <view class='bottom-box-history' style=' border-bottom: 1px solid #cccccc;'>
+            <view class='circle orange-circle'></view>
+            <text class='history-city'>天津市</text>
+            <view class='line-split'></view>
+            <text class='history-detail'>宁和郑振富</text>
+          </view>
+          <view class='bottom-box-history space-around'>
+            <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+              <view class="title-text">
+                <image src='{{people}}' class='people'></image>
+                {{array[index]}}
+              </view>
+            </picker>
+            <picker mode="multiSelector" bindchange="bindMultiPickerChange" value="{{multiIndex}}" range="{{multiArray}}">
+              <view class="title-text">
+                <image src='{{timeImg}}' class='people'></image>
+                {{time}}
+              </view>
+            </picker>
+            <view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+
+    <view class='choice-box' wx:if="{{step != 'detail'}}">
+      <view class='content'>
+        <view class='input-box'>
+          <view class='bottom-box-remark'>
+            <text class='remark-text'>共约</text>
+            <text style='color:#ff8901;font-size:20pt'>10.0</text>
+            <text class='remark-text'>元</text>
+          </view>
+          <view class='bottom-box-remark'>
+            <text class='remark-text'>拼单是预约制,发单后请耐心等待车主接单</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class='choice-box' style="padding-bottom:100rpx" wx:if="{{step != 'detail'}}">
+      <button class='to-waitting'>立即拼车</button>
+    </view>
+  </view>
+</view>

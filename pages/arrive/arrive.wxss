@@ -1,0 +1,247 @@
+.page-body{
+  position: fixed; 
+  height: 100%; 
+  width: 100%; 
+  display:flex; 
+  flex-direction: column;
+}
+
+.bottom-message-box{
+  display: flex;
+  flex-direction: column;
+}
+
+.cancel-box,.driver-box{
+  width: 100%;
+  background-color: #fff;
+  font-size: 11pt;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+  border-radius: 5rpx;
+  padding: 25rpx 30rpx 25rpx 25rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+}
+
+.driver-box{
+  margin-top: 13rpx;
+  padding-top: 30rpx;
+  padding-bottom: 8rpx;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+icon{
+  transform: translateY(6rpx);
+}
+
+.path-of-car{
+  width: 62rpx;
+  height: 116rpx;
+  position: absolute;
+  top: -180rpx;
+  left: 40rpx;
+}
+
+.get-on-the-car-img{
+  width: 470rpx;
+  background: #fff;
+  border-radius: 40rpx;
+  position: absolute;
+  top: 80rpx;
+  left: 140rpx;
+  font-size: 9pt;
+  display: flex;
+  justify-content: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  line-height: 64rpx;
+  padding-left: 35rpx;
+  padding-right: 36rpx;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.get-on-the-car-img::after{
+  display: block;
+  content:'';
+  width:20rpx;
+  height: 20rpx;
+  background: #fff;
+  position: absolute;
+  bottom: -8rpx;
+  left: 50%;
+  transform: rotate(45deg);
+}
+
+.watting-time{
+  line-height: 60rpx;
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+}
+
+.path{
+  position: absolute;
+  top: 200rpx;
+  left: 30rpx;
+}
+
+.now-position{
+  position: absolute;
+  bottom:228px;
+  right: 32rpx;
+}
+
+.driver-img--box{
+  padding-top: 8rpx;
+  padding-right: 30rpx;
+}
+
+.text{
+  font-size: 10pt;
+  align-self: center;
+}
+
+.driver-message{
+  border-bottom: 1px solid #e1e1e1;
+  display: flex;
+  width: 100%;
+  padding-bottom: 20rpx;
+}
+
+.car-box,.driver{
+  width: 50%;
+}
+
+.car-box{
+  display: flex;
+  flex-direction: column;
+  padding-left: 43rpx;
+}
+
+.license{
+  font-size: 14pt;
+  font-weight: 600;
+  margin-bottom: 15rpx;
+  padding-top: 10rpx;
+  box-sizing: border-box;
+  color: #010101;
+}
+
+.colorAndBrand{
+  font-size: 12pt;
+  color: #bababa;
+}
+
+.driver-image-style{
+  margin-right: 28rpx;
+}
+
+.driver{
+  display: flex;
+  flex-direction: row;
+  padding-left: 30rpx;
+  box-sizing: border-box;
+}
+
+.driver-name{
+  color: #010101;
+  font-size: 13pt;
+  padding-top:17rpx;
+  font-weight: 600;
+  margin-bottom: 5rpx;
+}
+
+.evaluate{
+  display: flex;
+  flex-direction: column;
+}
+
+.score{
+  padding-left: 10rpx;
+  color: #b6b6b6;
+}
+
+.call-box{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 8rpx;
+}
+
+.call-box button{
+  width: 50%;
+  background: #fff;
+  border-radius: 0px;
+  font-size: 11pt;
+}
+
+.call-box button::after{
+  border: none;
+}
+
+.phone-img{
+  margin-right: 5rpx;
+}
+
+.call{
+  border-right: 1px solid #e0e0e0;
+}
+
+icon{
+  margin-right: 9rpx;
+}
+
+.model{
+  position: fixed; 
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 107rpx;
+  padding-right: 107rpx;
+}
+
+.call-driver{
+  background: #fff;
+  padding: 50rpx 10rpx 8rpx 10rpx;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  border-radius: 10rpx;
+  flex-direction: column;
+}
+
+.phone-number-of-driver{
+  color: #000;
+  font-size:14pt;
+  text-align: center;
+  margin-bottom: 40rpx;
+}
+
+.decide{
+  display: flex;
+  flex-direction: row;
+  border-top: 1px solid #ccc;
+}
+
+.decide button::after{
+  border:none;
+}
+
+.decide button{
+  background: #fff;
+  width: 50%;
+  margin-top: 5rpx;
+}
+
+.decide .cancel{
+  border-right: 1px solid #ccc;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}

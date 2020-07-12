@@ -1,63 +1,74 @@
-<view class='page-body'>
+<scroll-view class='page-body' scroll-y="true">
   <!--标题  -->
   <view class='container-box'>
     <view class='order-title'>
-       <text class='order-title-text'>我的订单</text>
+      <text class='order-title-text'>我的订单</text>
     </view>
   </view>
   <!--订单内容  -->
-  <view class='order-content'>
-  <!--快车订单详情  -->
-    <view class='order-detail'>
-      <view class='order-detail-text01'>
-        <text class='order-detail-text01-01'>快车</text>
-        <text class='order-detail-text01-02'>已完成 ></text>
+  <view class='order-content' wx:for="{{orders}}" wx:key="id" bindtap='toDeal' data-index="{{index}}">
+    <view>
+      <!--快车订单详情  -->
+      <view class='order-detail' wx:if="{{item.type=='kc'}}"  >
+        <view class='order-detail-text01'>
+          <text class='order-detail-text01-01'>出租车</text>
+          <text class='order-detail-text01-02' wx:if="{{item.order_status==6}}">已完成 ></text>
+          <text class='order-detail-text01-02' wx:elif="{{item.order_status==-1}}">已取消 ></text>
+          <text class='order-detail-text01-02' wx:elif="{{item.order_status==-2}}">司机取消 ></text>
+          <text class='order-detail-text01-02' wx:elif="{{item.order_status==-3}}">超时取消 ></text>
+          <text class='order-detail-text01-02' wx:elif="{{item.order_status==5}}}">待支付 ></text>
+           <text class='order-detail-text01-02' wx:elif="{{item.order_status==3}}}">行程中 ></text>
+          <text class='order-detail-text01-02' wx:else>进行中 ></text>
+        </view>
+        <view class='order-detail-text02'>
+          <image class='order-detail-text02-timer' src='{{timerImg}}'></image>
+          <text class='order-detail-text02-02'> {{item.addTime}}</text>
+        </view>
+        <view class='order-detail-text03'>
+          <view class="order-detail-text03-circle"></view>
+          <text class='order-detail-text03-02'>{{item.fromAddress}}</text>
+        </view>
+        <view class='order-detail-text03'>
+          <view class="order-detail-text04-circle"></view>
+          <text class='order-detail-text03-02'>{{item.toAddress}}</text>
+        </view>
       </view>
-      <view class='order-detail-text02'>
-         <image class='order-detail-text02-timer' src='{{timerImg}}'></image>
-         <text class='order-detail-text02-02'> 上周日 10:24</text>
-      </view>
-      <view class='order-detail-text03'>
-         <view class="order-detail-text03-circle"></view> 
-         <text class='order-detail-text03-02'>北京市区大食堂路北京理工大...</text>
-      </view>
-       <view class='order-detail-text03'>
-         <view class="order-detail-text04-circle" ></view> 
-         <text class='order-detail-text03-02'>北京市通州区北斗星商业园区</text>
+
+      <!--平车订单详情  -->
+      <view class='order-detail' wx:if="{{item.type=='pc'}}">
+        <view class='order-detail-text01'>
+          <text class='order-detail-text01-01'>拼车</text>
+          <text class='order-detail-text01-02' wx:if="{{item.order_status==5}}">已完成 ></text>
+          <text class='order-detail-text01-02' wx:elif="{{item.order_status==-1}}">已取消 ></text>
+          <text class='order-detail-text01-02' wx:elif="{{item.order_status==-2}}">司机取消 ></text>
+          <text class='order-detail-text01-02' wx:elif="{{item.order_status==-3}}">超时取消 ></text>
+           <text class='order-detail-text01-02' wx:elif="{{item.order_status==21 || item.order_status==22}}">司机接驾中 ></text>
+          <text class='order-detail-text01-02' wx:elif="{{item.order_status==1 || item.order_status==2 || item.order_status==3}}">行程中 ></text>
+          <text class='order-detail-text01-02' wx:elif="{{item.order_status==4}}}">待支付 ></text>
+        </view>
+
+        <view class='order-detail-text02'>
+          <image class='order-detail-text02-timer' src='{{timerImg}}'></image>
+          <text class='order-detail-text02-02'> {{item.addTime}}</text>
+        </view>
+        <view class='order-detail-text02'>
+          <image class='order-detail-text02-aim' src='{{aimImg}}'></image>
+          <text class='order-detail-text02-02'> {{item.userAddress}}</text>
+        </view>
+        <view class='order-detail-text03'>
+          <view class="order-detail-text03-circle"></view>
+          <text class='order-detail-text03-02'>{{item.route.from_address}}</text>
+        </view>
+        <view class='order-detail-text03'>
+          <view class="order-detail-text04-circle"></view>
+          <text class='order-detail-text03-02'>{{item.route.to_address}}</text>
+        </view>
       </view>
     </view>
+  </view>
+  <view class='end-text' wx:if="{{showEnd==true}}">
+    没有更多的订单了
+  </view>
 
-  <!--平车订单详情  -->
-    <view class='order-detail'>
-      <view class='order-detail-text01'>
-        <text class='order-detail-text01-01'>拼车</text>
-        <text class='order-detail-text01-02'>已完成 ></text>
-      </view>
-    
-      <view class='order-detail-text02'>
-         <image class='order-detail-text02-timer' src='{{timerImg}}'></image>
-         <text class='order-detail-text02-02'> 上周日 10:24</text>
-      </view>
-      <view class='order-detail-text02'>
-         <image class='order-detail-text02-aim' src='{{aimImg}}'></image>
-         <text class='order-detail-text02-02'> 天津市桃城村支部北大门</text>
-      </view>
-      <view class='order-detail-text03'>
-         <view class="order-detail-text03-circle"></view> 
-         <text class='order-detail-text03-02'>北京市区大食堂路北京理工大...</text>
-      </view>
-       <view class='order-detail-text03'>
-         <view class="order-detail-text04-circle" ></view> 
-         <text class='order-detail-text03-02'>北京市通州区北斗星商业园区</text>
-      </view>
-    </view>
 
-    <view class='end-text'>
-      没有更多的订单了
-    </view>
-    
-
-   </view>
-    
-
-</view>
+</scroll-view>

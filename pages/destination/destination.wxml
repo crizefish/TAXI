@@ -1,0 +1,20 @@
+<view class='title'>
+  <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+    <view class="picker">
+      <view class='city'>{{multiArray[1][multiIndex[1]]=='北京' ? currentCity: multiArray[1][multiIndex[1]]}}</view>
+      <view class='picker-sign'></view>
+    </view>
+  </picker>
+  <input type='text' placeholder='您要去哪儿' bindinput='bindKeyInput' auto-focus='true'></input>
+</view>
+
+<scroll-view class='page-body' scroll-y="true">
+  <view class='for-sign' wx:for="{{sugResult}}" wx:key="key" data-item="{{item}}" bindtap='choiceTarget'>
+    <view class='sign'>❣</view>
+    <view class='choice'>
+      <text> {{item.name}}</text>
+      <view class='address'>{{item.address}}</view>
+    </view>
+  </view>
+
+</scroll-view>
