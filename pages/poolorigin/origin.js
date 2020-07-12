@@ -25,13 +25,25 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.searchResult(options.from_id);
-    this.setData({
-      from_address:options.from_address,
-      from_city: options.city
+    var that = this;
+    netWork.paramsCB({
+      //"from_keyword":'钦州',
+      //"from_keyword": that.data.city,
+      "adcode": wx.getStorageSync('adcode') ,
+      "token": wx.getStorageSync('token')
+    }, function (params) {
+      netWork.httpPOST("/kcv1/user/getRouteStart", params, function (res) {
+
+        console.log("qqqqqqqq", res)
+        that.setData({
+          descPool: res.data.result[0].from_address,
+          descPoolId: res.data.result[0].from_id,
+          allResult: res.data.result
+        })
+      })
     })
   },
-
+  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -84,23 +96,22 @@ Page({
     var that = this;
     var index = e.currentTarget.dataset.index;
     var choiceResult = that.data.allResult[index];
-    wx.setStorage({
-      key: "route_id",
-      data: choiceResult.route_id
-    });
     var token = wx.getStorageSync('token');
+    wx.setStorage({
+      key: "from_id",
+      data: choiceResult.from_id
+    });
     if (token == null || token == "") {
       wx.navigateTo({ //保留当前页面，跳转到应用内的某个页面（最多打开5个页面，之后按钮就没有响应的）
         url: "/pages/login/login"
       })
     } else {
       wx.navigateTo({
-        url: "/pages/index/index?carflag=2"
+        url: "/pages/index/index?carflag=3"
           + "&from_city=" + that.data.from_city
-          + "&from_address=" + that.data.from_address
-          + "&to_city=" + choiceResult.to_city
-          + "&to_address=" + choiceResult.to_address
-          + "&fare=" + choiceResult.fare
+          + "&from_address=" + choiceResult.from_address
+          + "&from_id=" + choiceResult.from_id
+
       })
     }
   },
@@ -109,9 +120,10 @@ Page({
     //获取起点
     netWork.paramsCB({
       "token": wx.getStorageSync('token'),
-      "to_keyword": e.detail.value
+      "from_keyword": e.detail.value,
+      "adcode": 0,
     }, function (params) {
-      netWork.httpPOST("/kcv1/user/searchRoute", params, function (res) {
+      netWork.httpPOST("/kcv1/base/getRouteStart  ", params, function (res) {
         that.setData({
           allResult: res.data.result
         })
@@ -125,9 +137,10 @@ Page({
     //根据起点搜索
     netWork.paramsCB({
       "token": wx.getStorageSync('token'),
-      "from_id": id
+      "from_keyword": "",
+      "adcode": 0,
     }, function (params) {
-      netWork.httpPOST("/kcv1/user/getRouteEnd", params, function (res) {
+      netWork.httpPOST("/kcv1/user/getRouteStart", params, function (res) {
         that.setData({
           allResult: res.data.result
         })
@@ -140,5 +153,23 @@ Page({
     wx.navigateTo({ //保留当前页面，跳转到应用内的某个页面（最多打开5个页面，之后按钮就没有响应的）
       url: "/pages/index/index"
     })
-  }
+  },
+
+  getCarFromAddress: function () {
+    var that = this;
+    netWork.paramsCB({
+      //"from_keyword":'钦州',
+      "from_keyword": that.data.city,
+      "token": wx.getStorageSync('token')
+    }, function (params) {
+      netWork.httpPOST("/kcv1/user/getRouteStart", params, function (res) {
+
+        console.log("qqqqqqqq", res)
+        that.setData({
+          descPool: res.data.result[0].from_address,
+          descPoolId: res.data.result[0].from_id
+        })
+      })
+    })
+  },
 })

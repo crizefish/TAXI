@@ -11,7 +11,7 @@
       <!--快车订单详情  -->
       <view class='order-detail' wx:if="{{item.type=='kc'}}"  >
         <view class='order-detail-text01'>
-          <text class='order-detail-text01-01'>快车</text>
+          <text class='order-detail-text01-01'>出租车</text>
           <text class='order-detail-text01-02' wx:if="{{item.order_status==6}}">已完成 ></text>
           <text class='order-detail-text01-02' wx:elif="{{item.order_status==-1}}">已取消 ></text>
           <text class='order-detail-text01-02' wx:elif="{{item.order_status==-2}}">司机取消 ></text>
@@ -38,11 +38,13 @@
       <view class='order-detail' wx:if="{{item.type=='pc'}}">
         <view class='order-detail-text01'>
           <text class='order-detail-text01-01'>拼车</text>
-          <text class='order-detail-text01-02' wx:if="{{item.order_status==6}}">已完成 ></text>
+          <text class='order-detail-text01-02' wx:if="{{item.order_status==5}}">已完成 ></text>
           <text class='order-detail-text01-02' wx:elif="{{item.order_status==-1}}">已取消 ></text>
           <text class='order-detail-text01-02' wx:elif="{{item.order_status==-2}}">司机取消 ></text>
           <text class='order-detail-text01-02' wx:elif="{{item.order_status==-3}}">超时取消 ></text>
-          <text class='order-detail-text01-02' wx:elif="{{item.order_status==5}}}">待支付 ></text>
+           <text class='order-detail-text01-02' wx:elif="{{item.order_status==21 || item.order_status==22}}">司机接驾中 ></text>
+          <text class='order-detail-text01-02' wx:elif="{{item.order_status==1 || item.order_status==2 || item.order_status==3}}">行程中 ></text>
+          <text class='order-detail-text01-02' wx:elif="{{item.order_status==4}}}">待支付 ></text>
         </view>
 
         <view class='order-detail-text02'>
@@ -51,20 +53,20 @@
         </view>
         <view class='order-detail-text02'>
           <image class='order-detail-text02-aim' src='{{aimImg}}'></image>
-          <text class='order-detail-text02-02'> {{item.user_address}}</text>
+          <text class='order-detail-text02-02'> {{item.userAddress}}</text>
         </view>
         <view class='order-detail-text03'>
           <view class="order-detail-text03-circle"></view>
-          <text class='order-detail-text03-02'>{{item.fromAddress}}</text>
+          <text class='order-detail-text03-02'>{{item.route.from_address}}</text>
         </view>
         <view class='order-detail-text03'>
           <view class="order-detail-text04-circle"></view>
-          <text class='order-detail-text03-02'>{{item.toAddress}}</text>
+          <text class='order-detail-text03-02'>{{item.route.to_address}}</text>
         </view>
       </view>
     </view>
   </view>
-  <view class='end-text'>
+  <view class='end-text' wx:if="{{showEnd==true}}">
     没有更多的订单了
   </view>
 

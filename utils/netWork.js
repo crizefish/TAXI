@@ -1,7 +1,9 @@
 
+const app = getApp();
 
-const apiURL = 'https://yxcx.zmkjgame.com';
-// var util = require('../../utils/md5.js')    
+//const apiURL = 'https://yxcx.zmkjgame.com';
+const apiURL = 'https://xcx.durmi.cn';
+//const apiURL = 'https://aswsay.zmkjgame.com';
 var rotateLeft = function (lValue, iShiftBits) {
   return (lValue << iShiftBits) | (lValue >>> (32 - iShiftBits));
 }
@@ -15,7 +17,7 @@ var addUnsigned = function (lX, lY) {
   lResult = (lX & 0x3FFFFFFF) + (lY & 0x3FFFFFFF);
   if (lX4 & lY4) return (lResult ^ 0x80000000 ^ lX8 ^ lY8);
   if (lX4 | lY4) {
-    if (lResult & 0x40000000) return (lResult ^ 0xC0000000 ^ lX8 ^ lY8);
+    if (lResult & 0x40000000) return (lResult ^ 0xC0000000 ^ lX8 ^ lY8);   
     else return (lResult ^ 0x40000000 ^ lX8 ^ lY8);
   } else {
     return (lResult ^ lX8 ^ lY8);

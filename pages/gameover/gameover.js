@@ -1,9 +1,6 @@
 // pages/gameover/gameover.js
 const app = getApp();
-// 引用百度地图微信小程序JSAPI模块 
-var bmap = require('../../libs/bmap-wx.min.js');
 var netWork = require('../../utils/netWork.js');
-var wxMarkerData = [];
 Page({
 
   /**
@@ -94,33 +91,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    var that = this;
-    var BMap = new bmap.BMapWX({
-      ak: '9nxZMWueKmnnnGgrt6Ie7fR3EdjYTD6N'
-    });
-    var fail = function(data) {
-      console.log(data)
-    };
-    var success = function(data) {
-      wxMarkerData = data.wxMarkerData;
-      console.log(data.wxMarkerData)
-      that.setData({
-        markers: wxMarkerData
-      });
-      that.setData({
-        latitude: wxMarkerData[0].latitude,
-        longitude: wxMarkerData[0].longitude,
-        address: wxMarkerData[0].address,
-        desc: wxMarkerData[0].desc
-      });
-    }
-    BMap.regeocoding({
-      fail: fail,
-      success: success,
-      // iconPath: '../../img/marker_red.png',
-      // iconTapPath: '../../img/marker_red.png'
-    });
-
   },
 
   toIndex :function(){

@@ -19,92 +19,13 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    var BMap = new bmap.BMapWX({
-      ak: '9nxZMWueKmnnnGgrt6Ie7fR3EdjYTD6N'
-    });
-    var fail = function (data) {
-      console.log(data)
-    };
-    var success = function (data) {
-      wxMarkerData = data.wxMarkerData;
-      console.log(data.wxMarkerData)
-      that.setData({
-        markers: wxMarkerData
-      });
-      that.setData({
-        latitude: wxMarkerData[0].latitude,
-        longitude: wxMarkerData[0].longitude,
-        address: wxMarkerData[0].address,
-        desc: wxMarkerData[0].desc
-      });
-    }
-    BMap.regeocoding({
-      fail: fail,
-      success: success,
-      // iconPath: '../../img/marker_red.png',
-      // iconTapPath: '../../img/marker_red.png'
-    });
-
+  
 
     //倒计时
     timing(this);
     charging(this);
     //用户发单
-    netWork.paramsCB({ 
-      "from_address": wx.getStorageSync("from_address"),
-      "from_location": wx.getStorageSync("from_location"),
-      "start_time": "0",
-      "token" : wx.getStorageSync("token"),
-      "to_address": wx.getStorageSync("to_address"),
-      "to_location":wx.getStorageSync("to_location"),
-      "tip":"0"
-     }, function (params) {
-      netWork.httpPOST("/kcv1/user/sendOrder", params, function (res) {
-        console.log(params)
-        console.log(res)
-        if (res.code == 0) {
-          wx.setStorage({ key: "order_sn", data: res.data.result.order_sn});
-          wx.navigateTo({
-            url: "/pages/takeover/takeover"
-          })
-        } else if (res.msg == '您有订单正在进行中。'){
-          netWork.paramsCB({
-            "token": wx.getStorageSync('token'),
-            "order_sn": wx.getStorageSync('order_sn')
-          }, function (params) {
-            netWork.httpPOST("/kcv1/user/orderDetail", params, function (res) {
-              if (res.code == 0) {
-                var orderStatus = res.data.result.order.order_status;
-                //  -3 超时取消 -2 司机取消 -1 用户取消  0 发单 1 已抢单 2 到达乘客地点 3 接到乘客  4 到达目的地  5 发起收款  6 已确认付款
-                if (orderStatus == 5) {
-
-                  wx.navigateTo({
-                    url: "/pages/paythefare/paythefare"
-                  })
-                }else{
-                  wx.showModal({
-                    title: res.msg,
-                    success: function (res) {
-                      if (res.confirm) {
-                        wx.navigateTo({
-                          url: "/pages/takeover/takeover"
-                        })
-                      } else if (res.cancel) {
-                        wx.navigateTo({
-                          url: "/pages/index/index"
-                        })
-                      }
-                    }
-                  })
-                }
-              }
-            })
-          })
-        } else {
-          alertInfo(res.msg)
-        }
-      })
-    })
+   
   },
 
   /**

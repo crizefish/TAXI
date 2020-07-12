@@ -10,9 +10,9 @@
           <view class='input-box' style= 'width: 80%'>
             <view class='top-box-history'>
               <view class='circle green-circle'></view>
-              <text class='history-city'>{{item.from_city}}</text>
+              <text class='history-city'>{{from_city}}</text>
               <view class='line-split'></view>
-              <text class='history-detail'>{{item.from_address}}</text>
+              <text class='history-detail'>{{from_address}}</text>
             </view>
             <view class='bottom-box-history' >
               <view class='circle orange-circle'></view>

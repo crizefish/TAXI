@@ -1,0 +1,438 @@
+.page-body{
+  position: fixed; 
+  height: 100%; 
+  width: 100%; 
+  display:flex; 
+  flex-direction: column;
+  background-color: #eeeeee
+}
+
+.title{
+   display:flex; 
+  flex-direction: row;
+  font-size: 13pt;
+  padding-left: 20rpx;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1px solid #dde1e4;
+  border-top: 1px solid #dde1e4;
+  justify-content: space-between;
+}
+.title input{
+  margin-left: 40rpx;
+  padding-left: 1px solid #dde1e4
+}
+.cancel-text{
+  font-size: 12pt;
+  padding-right: 40rpx;
+  color: #888;
+}
+.for-sign{
+   display:flex; 
+  flex-direction: row;
+   border-bottom: 1px solid #dde1e4;
+}
+.sign{
+  padding-top: 30rpx;
+  padding-left: 20rpx
+}
+.address{
+  padding-top: 15rpx;
+  padding-right: 15rpx;
+  color:   #888;
+  font-size: 11pt;
+}
+.choice{
+   display:flex; 
+  flex-direction: column;
+  font-size: 13pt;
+  padding-left: 20rpx;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+ 
+}
+
+/*隐藏滚动条*/
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+
+.choice-box{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 15rpx;
+  padding-right: 15rpx;
+  box-sizing: border-box;
+  padding-top: 30rpx;
+  background-color: #eeeeee;
+  height: 100vh
+}
+
+
+
+.content{
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  background: #fff;
+  box-sizing: border-box;
+  width: 100%;
+  padding-top: 50rpx;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+  margin-bottom: 20rpx;
+}
+.remove-address{
+  display: flex;
+  flex-direction: row-reverse;
+  padding-right: 75rpx
+}
+
+.now{
+  line-height: 60rpx;
+  font-size: 12pt;
+  width: 112rpx;
+  height: 60rpx;
+  border: 1px solid #dbdbdb;
+  border-radius: 25px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 30rpx;
+  align-self: center;
+}
+.car-show{
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  background: #fff;
+  box-sizing: border-box;
+  width: 100%;
+  height: 376rpx;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.count-money{
+  padding-top: 15rpx;
+  padding-bottom: 15rpx;
+   display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items:baseline;
+}
+.count-money text{
+  padding-left: 15rpx
+}
+.car-sign{
+width: 120rpx;
+  height: 49rpx;
+   text-align: center;
+    align-self: center;
+  
+}
+.to-waitting{
+  width: 80%;
+  margin-top: 60rpx;
+  color: #fff;
+  background-color: #201d1d
+}
+
+.input-box{
+  padding-left: 35rpx;
+  box-sizing: border-box;
+  
+}
+
+.top-box{
+  display: flex;
+  flex-direction: row;
+  padding-right: 28rpx;
+}
+
+.circle{
+  display: block;
+  content: '';
+  width:14rpx;
+  height: 14rpx;
+  border-radius: 50%;
+  margin-right: 30rpx;
+  margin-top: 8rpx;
+}
+
+.green-circle{
+  background: #36bd7a;
+}
+
+.orange-circle{
+  background: #ff8903;
+}
+.orange-text{
+  color: #ff8903;
+  font-weight: bold;
+}
+
+.now-position{
+  color: #464646;
+  transform: translateY(-5rpx);
+  padding-bottom: 44rpx;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+  font-size:13pt;
+}
+
+.bottom-box{
+  padding-top: 40rpx;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.bottom-box .now-position{
+  border-bottom: 0 none;
+  padding-bottom: 34rpx;
+}
+
+.chat{
+  width: 320rpx;
+  height: 76rpx;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  left: 270rpx;
+  top: 22rpx;
+  padding-left: 48rpx;
+  box-sizing: border-box;
+  font-size: 11pt;
+  color: #fff;
+  line-height: 76rpx;
+}
+
+icon{
+  transform: translateY(10rpx);
+  margin-left: 6rpx;
+}
+
+.aim{
+  width: 94rpx;
+  height: 94rpx;
+}
+
+.aim-box{
+  position: absolute;
+  right: 13rpx;
+  top: -92rpx;
+}
+
+.enlargemen-and-reduction-box{
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 50%;
+  color: #505050;
+  border: 1px solid #dde1e4;
+  position: absolute;
+  right: 13rpx;
+  top:-462rpx;
+  background: #fff;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  padding-top: 10rpx;
+  box-sizing: border-box;
+  box-shadow:  0 0 1px rgba(0, 0, 0, 0.1)
+}
+
+.oprate{
+  align-self: center;
+  line-height: 36rpx;
+}
+
+.add{
+  font-size: 22pt;
+}
+
+
+.path-of-car{
+  width: 62rpx;
+  height: 116rpx;
+  position: absolute;
+  top: -500rpx;
+  left: 200rpx;
+  transform:rotate(18deg);
+}
+
+.get-on-the-car-img{
+  width: 204rpx;
+  height: 90rpx;
+  position: absolute;
+  top: -230rpx;
+  left: 260rpx;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-size: 9pt;
+  display: flex;
+  line-height: 78rpx;
+  justify-content: center;
+}
+
+.time-wait{
+  color: #fe7201;
+  padding-right: 6rpx;
+}
+.sug_info{
+   display: flex;
+  flex-direction: column;
+}
+.yuzhong{
+  height: 30rpx;
+  border: red
+}
+
+.place-address{
+  color: #92929a;
+  font-size: 25rpx;
+  border-bottom: 1px solid #f5f5f7;
+}
+
+.mymessage{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0,0.3);
+  z-index: 13;
+}
+
+.phonumber{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 65%;
+  height: 100%;
+  background: #fff;
+  z-index: 11;
+}
+
+.nickname{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.headportrait{
+  width: 180rpx;
+  height: 180rpx;
+}
+
+.mycall{
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+
+.petname{
+  font-size: 10pt;
+  color: #888;
+}
+
+.bottom-box1{
+  padding-top: 66rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+}
+.operation-list{
+   display: flex;
+  flex-direction: column;
+  padding-left: 40rpx
+}
+
+.travel-itinerary{
+  width: 42rpx;
+  height: 42rpx;
+  margin-right: 25rpx;
+}
+
+.travel-text{
+  font-size: 13pt;
+}
+
+.row-box{
+  display:flex; 
+  align-items:center;
+  margin-bottom:50rpx;
+}
+
+/* #map{
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+} */
+.star{
+  width: 28rpx;
+  height: 28rpx;
+}
+.title-text{
+  font-size: 13pt;
+  padding-top: 10rpx;
+  color: #acacac
+}
+.history-city{
+  font-weight: 600;
+  font-size: 12pt;
+}
+.history-detail{
+  font-size: 12pt;
+}
+.line-split-line{
+  background-color: #01080e;
+  width: 2rpx;
+  height: 50rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+}
+
+.top-box-history{
+  display: flex;
+  flex-direction: row;
+  margin-right: 20rpx;
+  padding-bottom: 30rpx;
+}
+.bottom-box-history{
+    display: flex;
+  flex-direction: row;
+  margin-right: 20rpx;
+  padding-top: 30rpx;
+  padding-bottom:30rpx;
+}
+.content-history{
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  background: #fff;
+  box-sizing: border-box;
+  width: 100%;
+  padding-top: 30rpx;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  margin-top:20rpx;
+  margin-bottom: 10rpx
+
+}
+
+.for-column{
+  display: flex;
+  flex-direction: column;
+  padding-top: 30rpx
+}

@@ -37,7 +37,12 @@ Page({
    */
   onLoad: function(options) {
     this.searchResult();
-    that = this
+    that = this;
+    if(options.city!=null && options.city!=''){
+      that.setData({
+        currentCity:options.city
+      })
+    }
   },
   bindMultiPickerChange: function (e) {
     that.setData({
@@ -58,6 +63,10 @@ Page({
           "multiArray[1]": list,
           "multiIndex[0]": e.detail.value,
           "multiIndex[1]": 0
+        });
+
+        that.setData({
+          "currentCity": that.data.multiArray[1][that.data.multiIndex[1]]
         })
 
     }
@@ -143,14 +152,15 @@ Page({
     //   key: "from_location",
     //   data: "31.19863667538746,121.60027899370256"
     // });
+     // wx.setStorage({
+    //   key: "from_address",
+    //   data: "上海浦东软件园祖冲之园-X座西南198米|||上海市浦东新区X620(金科路)"
+    // });
     // wx.setStorage({
     //   key: "to_location",
     //   data: "31.200241933556,121.60184933499"
     // });
-    // wx.setStorage({
-    //   key: "from_address",
-    //   data: "上海浦东软件园祖冲之园-X座西南198米|||上海市浦东新区X620(金科路)"
-    // });
+
     // wx.setStorage({
     //   key: "to_address",
     //   data: "印语复印打印店|||上海市浦东新区晨晖路浦东软件园W2座底层"
@@ -171,7 +181,7 @@ Page({
     if (e.detail.value == null || e.detail.value == '') {
       return;
     }
-    var city = this.data.multiArray[1][this.data.multiIndex[1]]
+    var city = this.data.currentCity;
     console.log("city",city)
     this.searchResult(city+e.detail.value)
   },
@@ -180,7 +190,7 @@ Page({
     var that = this;
     // var key = config.Config.key;
     var myAmapFun = new amapFile.AMapWX({
-      key: '4f3444ea6fce9a52d068cb97c9f3faf5'
+      key: app.globalData.MapKey
     });
     myAmapFun.getInputtips({
       keywords: str,

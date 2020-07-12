@@ -30,7 +30,7 @@
       </view>
     </view>
     <!--以下是支付金额  -->
-    <view class='pay'>
+    <view class='pay-title-c'>
       <text>支付金额:</text>
       <text class='howmuch'>{{howmuch}}</text>
       <text>元</text>
@@ -39,10 +39,11 @@
     <view class='driver-box quick'>
       <view class='title'>
         <view class='bottom-line'></view>
-        <text>快车</text>
+        <text wx:if="{{carType == 'kc'}}">快车</text>
+        <text wx:if="{{carType == 'pc'}}">拼车</text>
         <view class='bottom-line'></view>
       </view>
-      <view class='about-trip'>
+      <view class='about-trip' wx:if="{{carType == 'kc'}}">
         <view class='item'>
           <text>起步价</text>
           <text class='starting-price'>{{startingPrice}}元</text>
@@ -57,8 +58,10 @@
         </view>
       </view>
     </view>
+
+    
     <!--以下是支付方式  -->
-    <view class='pay'>
+    <view class='pay-title-c'>
       <text>支付方式</text>
     </view>
     <view class='driver-box quick methods'>
@@ -93,5 +96,49 @@
     <view class='message-box btn-box' bindtap='pay'>
       <button class='pay-button'>去支付</button>
     </view>
+
+<!-- ///////////////////////////////////// -->
+ </view>
+
+  <!--输入钱包密码-->
+
+  <view wx:if="{{wallets_password_flag}}" class="wallets-password">
+    <view class="input-content-wrap">
+      <view class="top">
+        <view catchtap="closePay" class="close">×</view>
+        <view class="txt">请输入支付密码</view>
+        <view catchtap="modify_password" class="forget"></view>
+      </view>
+      <view class="actual_fee">
+        <span>￥</span>
+        <text>{{howmuch}}</text>
+      </view>
+      <view catchtap="set_Focus" class="input-password-wrap">
+        <view class="password_dot">
+          <i wx:if="{{wallets_password.length>=1}}"></i>
+        </view>
+        <view class="password_dot">
+          <i wx:if="{{wallets_password.length>=2}}"></i>
+        </view>
+        <view class="password_dot">
+          <i wx:if="{{wallets_password.length>=3}}"></i>
+        </view>
+        <view class="password_dot">
+          <i wx:if="{{wallets_password.length>=4}}"></i>
+        </view>
+        <view class="password_dot">
+          <i wx:if="{{wallets_password.length>=5}}"></i>
+        </view>
+        <view class="password_dot">
+          <i wx:if="{{wallets_password.length>=6}}"></i>
+        </view>
+
+      </view>
+
+    </view>
+ <input bindinput="set_wallets_password" class="input-content" password type="number" focus="{{isFocus}}" maxlength="6" />
+
+<!-- ///////////////////////////////////// -->
+
   </view>
 </scroll-view>

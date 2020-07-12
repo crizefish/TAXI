@@ -23,35 +23,42 @@
       <image src='{{btn_user2x}}' class='img-user' bindtap='changeSwitch'></image>
     </view>
     <view class='type-of-car'>
-      <button class='{{(typeOfCar=="快车"?"express":"carpooling")+" car-text"}}' bindtap='switchExpress'>快车</button>
-      <button class='{{(typeOfCar=="拼车"?"express":"carpooling")+" car-text"}}' bindtap='switchCarPooling'>拼车</button>
+      <button class='{{(typeOfCar=="出租车"?"express":"carpooling")+" car-text"}}' bindtap='switchExpress'>出租车</button>
+      <button class='{{(typeOfCar=="合乘"?"express":"carpooling")+" car-text"}}' bindtap='switchCarPooling'>合乘</button>
     </view>
-    <!-- 快车 -->
-    <view wx:if="{{typeOfCar=='快车'}}">
-      <map id="navi_map" scale="14" markers="{{markers}}" polyline="{{polyline}}" latitude='{{latitude}}' longitude='{{longitude}}' style="width:100%;height:{{heightOfMap}}vh;display:{{showmap}}" show-location='true'></map>
+    <!-- 出租车 -->
+    <view wx:if="{{typeOfCar=='出租车'}}">
+      <!-- <map id="navi_map" scale="14" markers="{{markers}}" polyline="{{polyline}}" latitude='{{latitude}}' longitude='{{longitude}}' style="width:100%;height:{{heightOfMap}}vh;display:{{showmap}}" show-location='true'></map> -->
+      <map id="navi_map" longitude="{{longitude}}" latitude="{{latitude}}" scale="14" controls="{{controls}}" markers="{{markers}}" bindcontroltap="controltap" polyline="{{polyline}}" bindmarkertap="markertap" circles="{{circles}}" style="width:100%;height:{{heightOfMap}}vh;display:{{showmap}}"
+        bindregionchange="regionchange"
+        show-location='true'>
+      </map>
+        <cover-view class='aim-from-img' style='display:{{showmap}}'>
+            <cover-image class='from-img ' src='{{fromImg}}'></cover-image>
+          </cover-view>
       <view class='choice-box'>
         <view class='content' wx:if="{{showCar=='hide'}}">
           <view class='now'>现在</view>
           <view class='input-box'>
             <view class='top-box'>
               <view class='circle green-circle'></view>
-              <input type='text' class='now-position' value='{{address}}'></input>
+              <input type='text' class='now-position' value='{{desc}}'></input>
             </view>
             <view class='top-box bottom-box'>
               <view class='circle orange-circle'></view>
-              <input type="text" bindinput="bindKeyInput" class='now-position' bindfocus="FuncHiddenMap" bindblur="FuncshowMap" placeholder='您要去哪儿' value='{{destination}}'></input>
+              <input type="text" class='now-position' bindfocus="FuncHiddenMap" bindblur="FuncshowMap" placeholder='您要去哪儿' value='{{destination}}'></input>
 
               <view class='chat' style='background-image:url({{chatImg}});display:{{chatShow}}' wx-if="{{hiddenEgg=='show'}}">
                 去：{{whereAreUGoing}}
               </view>
             </view>
           </view>
-          <view class='aim-box' bindtap='clear'>
-            <image class='aim' src='{{aim}}'></image>
-          </view>
-          <view class='path'>
+          <cover-view class='aim-box' bindtap='clear'>
+            <cover-image class='aim' src='{{aim}}' bindtap='my_location'></cover-image>
+          </cover-view>
+          <!-- <view class='path'>
             <image class='path-of-car' src='{{pathOfCar}}' style='display:{{showmap}}'></image>
-          </view>
+          </view> -->
           <view class='get-on-the-car' style='display:{{showmap}}'>
             <view class='get-on-the-car-img' style='background-image:url({{getOnTheCar}});'>
               <view class='time-wait'>{{timeWait}}</view>
@@ -74,22 +81,22 @@
           <text>{{prePrices}}</text>
           <text style='font-size:12pt'>元</text>
         </view>
-        <button class='to-waitting' bindtap='checkLogin'>呼叫快车</button>
+        <button class='to-waitting' bindtap='checkNearDriver'>呼叫出租车</button>
       </view>
     </view>
 
-    <!-- 拼车 -->
-    <view wx:if="{{typeOfCar=='拼车'}}">
+    <!-- 合乘 -->
+    <scroll-view scroll-y="true" style='padding-bottom:300rpx;height:1400rpx;width:100%; overflow:scroll;' wx:if="{{typeOfCar=='合乘'}}">
       <view class='choice-box-pool' wx:if="{{step == 'choice'}}">
         <view class='content-pool' style='margin-bottom:10rpx'>
           <view class='input-box'>
             <view class='top-box'>
               <view class='circle green-circle'></view>
-              <input type='text' class='now-position' value='{{address}}'></input>
+              <input type='text' class='now-position' value='{{descPool}}' bindtap='toPoolOrign'></input>
             </view>
             <view class='top-box bottom-box'>
               <view class='circle orange-circle'></view>
-              <input type="text" bindinput="bindKey" class='now-position' bindfocus="FuncHiddenMap" bindblur="FuncshowMap" placeholder='您要去哪儿' value='{{destination}}'></input>
+              <input type="text" class='now-position' bindfocus="FuncHiddenMap" bindblur="FuncshowMap" placeholder='您要去哪儿' value='{{destination}}'></input>
 
               <view class='chat' style='background-image:url({{chatImg}});display:{{chatShow}}' wx-if="{{hiddenEgg=='show'}}">
                 去：{{whereAreUGoing}}
@@ -150,66 +157,66 @@
         </scroll-view>
       </view>
 
+      <scroll-view scroll-y="true" style='padding-bottom:300rpx;height:1000rpx;width:100%; overflow:scroll;'>
 
-      <view class='choice-box-pool' wx:if="{{step == 'detail'}}">
-        <view class='content-pool'>
-          <view class='input-box'>
-            <view class='bottom-box-history'>
-              <image src='{{aim}}' class='aim'></image>
-              <text style='font-size: 14pt;padding-left:48rpx;'>{{address}}</text>
-            </view>
-            <view class='top-box-history'>
-              <view class='circle green-circle'></view>
-              <text class='history-city'>{{choiceResult.from_city}}</text>
-              <view class='line-split'></view>
-              <text class='history-detail'>{{choiceResult.from_address}}</text>
-            </view>
-            <view class='bottom-box-history' style=' border-bottom: 1px solid #cccccc;'>
-              <view class='circle orange-circle'></view>
-              <text class='history-city'>{{choiceResult.to_city}}</text>
-              <view class='line-split'></view>
-              <text class='history-detail'>{{choiceResult.to_address}}</text>
-            </view>
-            <view class='bottom-box-history space-around'>
-              <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
-                <view class="title-text">
-                  <image src='{{people}}' class='people'></image>
-                  {{array[index]}}
+        <view class='choice-box-pool' wx:if="{{step == 'detail'}}">
+          <view class='content-pool'>
+            <view class='input-box'>
+              <view class='bottom-box-history'>
+                <image src='{{aim}}' class='aim'></image>
+                <text style='font-size: 14pt'>{{desc}}</text>
+              </view>
+              <view class='top-box-history'>
+                <view class='circle green-circle'></view>
+                <text class='history-city'>{{choiceResult.from_city}}</text>
+                <view class='line-split'></view>
+                <text class='history-detail'>{{choiceResult.from_address}}</text>
+              </view>
+              <view class='bottom-box-history' style=' border-bottom: 1px solid #cccccc;'>
+                <view class='circle orange-circle'></view>
+                <text class='history-city'>{{choiceResult.to_city}}</text>
+                <view class='line-split'></view>
+                <text class='history-detail'>{{choiceResult.to_address}}</text>
+              </view>
+              <view class='bottom-box-history space-around'>
+                <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+                  <view class="title-text">
+                    <image src='{{people}}' class='people'></image>
+                    {{array[index]}}
+                  </view>
+                </picker>
+                <picker mode="multiSelector" bindchange="bindMultiPickerChange" value="{{multiIndex}}" range="{{multiArray}}">
+                  <view class="title-text">
+                    <image src='{{timeImg}}' class='people'></image>
+                    {{time}}
+                  </view>
+                </picker>
+                <view>
                 </view>
-              </picker>
-              <picker mode="multiSelector" bindchange="bindMultiPickerChange" value="{{multiIndex}}" range="{{multiArray}}">
-                <view class="title-text">
-                  <image src='{{timeImg}}' class='people'></image>
-                  {{time}}
-                </view>
-              </picker>
-              <view>
               </view>
             </view>
           </view>
         </view>
-      </view>
-
-
-      <view class='choice-box-pool' wx:if="{{step == 'detail'}}">
-        <view class='content-pool'>
-          <view class='input-box'>
-            <view class='bottom-box-remark'>
-              <text class='remark-text'>共约</text>
-              <text style='color:#ff8901;font-size:20pt'>{{fare}}</text>
-              <text class='remark-text'>元</text>
-            </view>
-            <view class='bottom-box-remark'>
-              <text class='remark-text'>拼单是预约制,发单后请耐心等待车主接单</text>
+        <view class='choice-box-pool' wx:if="{{step == 'detail'}}">
+          <view class='content-pool'>
+            <view class='input-box'>
+              <view class='bottom-box-remark'>
+                <text class='remark-text'>共约</text>
+                <text style='color:#ff8901;font-size:20pt'>{{fare}}</text>
+                <text class='remark-text'>元</text>
+              </view>
+              <view class='bottom-box-remark'>
+                <text class='remark-text'>拼单是预约制,发单后请耐心等待车主接单</text>
+              </view>
             </view>
           </view>
         </view>
-      </view>
+        <view class='choice-box-pool' style="padding-bottom:150rpx;padding-top:0rpx" wx:if="{{step == 'detail'}}">
+          <button class='to-waitting' bindtap='sendPoolOrder'>立即合乘</button>
+        </view>
+      </scroll-view>
 
-      <view class='choice-box-pool' style="padding-bottom:100rpx" wx:if="{{step == 'detail'}}">
-        <button class='to-waitting'>立即拼车</button>
-      </view>
-    </view>
+    </scroll-view>
 
   </view>
 </view>

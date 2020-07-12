@@ -40,7 +40,8 @@ Page({
     codeIndex: 0,
     showDiv: 'init',
     userCode: '',
-    buttonColor: '#bfbfbf'
+    buttonColor: '#bfbfbf',
+    isNewUser:false
 
   },
   CONSTANTS: {
@@ -54,7 +55,7 @@ Page({
    */
   onLoad: function(options) {
     wx.request({
-      url: app.globalData.RequestURL + '/kcv1/index/getServerTime',
+      url: app.globalData.GlobalAPI + '/kcv1/index/getServerTime',
       header: {
         "content-type": "application/json"
       },
@@ -171,12 +172,10 @@ Page({
 
   //校验登陆状态
   checkLoginStatus: function(e) {
-   
-
     var result;
     var that = this;
     var mobile = that.data.phoneNumber;
-    var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
+    var myreg = /^[1][3,4,5,6,7,8,9][0-9]{9}$/;
     if (mobile == null || mobile.trim == "") {
       that.alert('手机号不能为空')
       return;
@@ -185,7 +184,7 @@ Page({
       that.alert('请输入正确的手机号')
       return;
     }
-    
+
     netWork.paramsCB({
       "mobile": mobile
     }, function(params) {
@@ -195,6 +194,9 @@ Page({
         } else {
           result = 'getCode';
           that.sendMessageCode(that.CONSTANTS.SMS_CODE_TYPE_REGISTER);
+          that.setData({
+            isNewUser: true,
+          })
         }
         that.setData({
           showDiv: result,
@@ -233,22 +235,53 @@ Page({
       })
       return;
     }
-
-    netWork.httpPOST("/kcv1/user/resetPassword", params, function (res) {
-      //成功帮他后台登陆一下
-      if (res.code == 0) {
-        wx.showModal({
-          title: '重置密码成功',
-          content: '',
-        })
-        that.login()
-      } else {
-        wx.showModal({
-          title: res.msg,
-          content: '',
-        })
-      }
+if(!that.data.isNewUser){
+ netWork.paramsCB({
+      "code": that.data.userCode,
+      "mobile": that.data.phoneNumber,
+      "password": that.data.password,
+    }, function(params) {
+      netWork.httpPOST("/kcv1/user/resetPassword", params, function(res) {
+        //成功帮他后台登陆一下
+        if (res.code == 0) {
+          wx.showModal({
+            title: '重置密码成功',
+            content: '',
+          })
+          that.login()
+        } else {
+          wx.showModal({
+            title: res.msg,
+            content: '',
+          })
+        }
+      })
     })
+}else{
+    netWork.paramsCB({
+      "code": that.data.userCode,
+      "mobile": that.data.phoneNumber,
+      "password": that.data.password,
+      "registration_id":"1"
+    }, function(params) {
+      netWork.httpPOST("/kcv1/user/register", params, function(res) {
+        //成功帮他后台登陆一下
+        if (res.code == 0) {
+          wx.showModal({
+            title: '注册成功',
+            content: '',
+          })
+          that.login()
+        } else {
+          wx.showModal({
+            title: res.msg,
+            content: '',
+          })
+        }
+      })
+    })
+
+}
   },
 
 

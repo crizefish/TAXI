@@ -1,21 +1,29 @@
 {
   "pages": [
         "pages/index/index",
-    "pages/pooldestination/destination",
+    "pages/poolorigin/origin",
 
+    "pages/pctakeover/takeover",
+    "pages/takeover/takeover",
+    "pages/paythefare/paythefare",
+    "pages/pooldestination/destination",
     "pages/carpool/carpool",
     "pages/destination/destination",
-    "pages/paythefare/paythefare",
     "pages/login/login",
     "pages/waitting/waitting",
+    "pages/pcwaitting/waitting",
     "pages/gameover/gameover",
-    "pages/takeover/takeover",
     "pages/history/history",
     "pages/express/express",
     "pages/arrive/arrive",
-    "pages/logs/logs",
-    "pages/carpool"
+    "pages/logs/logs"
   ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",

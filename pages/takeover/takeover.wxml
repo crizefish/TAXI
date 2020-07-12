@@ -1,6 +1,9 @@
 <!--pages/waitting/waitting.wxml-->
 <view class='page-body'>
- <map class="map" id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="14" show-location="true" markers="{{markers}}" bindmarkertap="makertap" style="width:100%;height:63vh;"></map> 
+   <map id="navi_map" longitude="{{longitude}}" latitude="{{latitude}}" scale="14" controls="{{controls}}" markers="{{markers}}" bindcontroltap="controltap" polyline="{{polyline}}" bindmarkertap="markertap" circles="{{circles}}" style="width:100%;height:64vh;"
+        bindregionchange="regionchange"
+        show-location='true'>
+      </map>
   <view class='get-on-the-car-img'>
     <view class='watting-time'>距您
       <view class='orange'>

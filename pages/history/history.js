@@ -12,7 +12,8 @@ Page({
     timerImg: app.globalData.GlobalIMG + 'sy_yuyue_shijian@2x.png',
     aimImg: app.globalData.GlobalIMG + 'sy_dingwei@2x.png',
     orderType: 'express',
-    orders: []
+    orders: [],
+    showEnd:false
   },
 
   /**
@@ -30,18 +31,22 @@ Page({
           orders[i].addTime = util.formatTime(orders[i].add_time, 'Y年M月D日 h:m');
           var fromAddressAll = orders[i].from_address;
           var toAddressAll = orders[i].to_address;
+          var userAddressAll = orders[i].user_address;
           var fromAddress = fromAddressAll.substring(0, fromAddressAll.indexOf("|||"))
-          var toAddress = toAddressAll.substring(0, toAddressAll.indexOf("|||"))
+          var toAddress = toAddressAll.substring(0, toAddressAll.indexOf("|||"));
+          var userAddress = userAddressAll.substring(0, userAddressAll.indexOf("|||"));
           orders[i].fromAddress = fromAddress.length > 12 ? fromAddress.substring(0, 12) + '...' : fromAddress
           orders[i].toAddress = toAddress.length > 12 ? toAddress.substring(0, 12) + '...' : toAddress
+          orders[i].userAddress = userAddress.length > 12 ? userAddress.substring(0, 12) + '...' : userAddress
         }
         that.setData({
-          orders: orders
+          orders: orders,
+          showEnd: true
         })
 
       })
     })
-
+ 
 
   },
 
@@ -49,31 +54,60 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-
+    
   },
   toDeal: function(e) {
     var that = this;
     var url = '';
     var index = e.currentTarget.dataset.index;
-    console.log(index)
     var order_sn = that.data.orders[index].order_sn;
     var order_status = that.data.orders[index].order_status;
-    wx.setStorage({
-      key: "order_sn",
-      data: order_sn
-    });
-    //待支付
-    if (order_status == 5)
-      url = "/pages/paythefare/paythefare";
-    //行程中
-    if (order_status == 0)
-      url = "/pages/waitting/waitting";
-    //1 已抢单 2 到达乘客地点 3 接到乘客  4 到达目的地  
-    if (order_status == 1 || order_status == 2 || order_status == 3 || order_status == 4)
-      url = "/pages/takeover/takeover";
-    wx.navigateTo({
-      url: url,
-    })
+    var carType = that.data.orders[index].type;
+    if (carType == 'pc'){
+      wx.setStorage({
+        key: "pc_sn",
+        data: order_sn
+      });
+
+      //已经结束
+      if (order_status == 5 || order_status == -1 || order_status == -2 || order_status == -3)
+       return;
+
+      //待支付
+      if (order_status == 4)
+        url = "/pages/paythefare/paythefare?carType=" + carType;
+      //行程中
+
+      if (order_status == 0){
+        url = "/pages/pcwaitting/waitting";
+      } else if (order_status == 1 || order_status == 2 || order_status == 22 || order_status == 21 || order_status == 3){
+        url = "/pages/pctakeover/takeover";
+      }
+      //1 已抢单 2 到达乘客地点 3 接到乘客  4 到达目的地  
+      // if (order_status == 1 || order_status == 2 || order_status == 3)
+      
+      wx.navigateTo({
+        url: url,
+      })
+    }else{
+      wx.setStorage({
+        key: "order_sn",
+        data: order_sn
+      });
+      //待支付
+      if (order_status == 5)
+        url = "/pages/paythefare/paythefare";
+      //行程中
+      if (order_status == 0)
+        url = "/pages/waitting/waitting";
+      //1 已抢单 2 到达乘客地点 3 接到乘客  4 到达目的地  
+      if (order_status == 1 || order_status == 2 || order_status == 3 || order_status == 4)
+        url = "/pages/takeover/takeover";
+      wx.navigateTo({
+        url: url,
+      })
+    }
+
 
   },
   /**
@@ -101,7 +135,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
+ 
   },
 
   /**

@@ -1,25 +1,24 @@
-.page-body{
-  position: fixed; 
-  height: 100%; 
-  width: 100%; 
-  display:flex; 
+.page-body {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  display: flex;
   flex-direction: column;
-  
 }
 
-.img-box{
+.img-box {
   padding-left: 15rpx;
   padding-right: 15rpx;
   box-sizing: border-box;
 }
 
-.img-user{
+.img-user {
   width: 50rpx;
   height: 50rpx;
   margin-left: 8rpx;
 }
 
-.type-of-car{
+.type-of-car {
   height: 119rpx;
   display: flex;
   justify-content: space-around;
@@ -30,30 +29,31 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 }
 
-.car-text{
+.car-text {
   background: none;
   font-size: 14pt;
 }
 
-.car-text::after{
+.car-text::after {
   border: none;
 }
 
-.express{
-  color:#fd9151;
+.express {
+  color: #fd9151;
 }
 
 /* 快车 */
-.box-of-express{
+
+.box-of-express {
   position: fixed;
   bottom: 26rpx;
   width: 100%;
-  border-radius:5px;
-  height: 30rpx; 
+  border-radius: 5px;
+  height: 30rpx;
   box-shadow: 10px 10px 5px #888;
 }
 
-.choice-box{
+.choice-box {
   width: 100%;
   display: flex;
   position: absolute;
@@ -62,6 +62,7 @@
   padding-right: 15rpx;
   box-sizing: border-box;
 }
+
 .choice-box-pool {
   width: 100%;
   display: flex;
@@ -73,15 +74,13 @@
   background-color: #eee;
 }
 
-
-
-.remove-address{
+.remove-address {
   display: flex;
   flex-direction: row-reverse;
-  padding-right: 75rpx
+  padding-right: 75rpx;
 }
 
-.now{
+.now {
   line-height: 60rpx;
   font-size: 12pt;
   width: 112rpx;
@@ -92,8 +91,10 @@
   text-align: center;
   margin-bottom: 30rpx;
   align-self: center;
+  margin-left: 42%;
 }
-.car-show{
+
+.car-show {
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
   border-radius: 3px;
   background: #fff;
@@ -106,77 +107,78 @@
   position: relative;
 }
 
-.count-money{
+.count-money {
   padding-top: 15rpx;
   padding-bottom: 15rpx;
-   display: flex;
+  display: flex;
   justify-content: center;
   flex-direction: row;
-  align-items:baseline;
+  align-items: baseline;
 }
-.count-money text{
-  padding-left: 15rpx
+
+.count-money text {
+  padding-left: 15rpx;
 }
-.car-sign{
-width: 120rpx;
+
+.car-sign {
+  width: 120rpx;
   height: 49rpx;
-   text-align: center;
-    align-self: center;
-  
+  text-align: center;
+  align-self: center;
 }
-.to-waitting{
+
+.to-waitting {
   width: 80%;
   margin-top: 60rpx;
   color: #fff;
-  background-color: #201d1d
+  background-color: #201d1d;
 }
 
-
-.top-box{
+.top-box {
   display: flex;
   flex-direction: row;
   padding-right: 28rpx;
 }
 
-.circle{
+.circle {
   display: block;
   content: '';
-  width:14rpx;
+  width: 14rpx;
   height: 14rpx;
   border-radius: 50%;
   margin-right: 30rpx;
   margin-top: 8rpx;
 }
 
-.green-circle{
+.green-circle {
   background: #36bd7a;
 }
 
-.orange-circle{
+.orange-circle {
   background: #ff8903;
 }
 
-.now-position{
+.now-position {
   color: #464646;
   transform: translateY(-5rpx);
   padding-bottom: 44rpx;
   border-bottom: 1px solid #ccc;
   width: 100%;
-  font-size:13pt;
+  font-size: 13pt;
 }
 
-.bottom-box{
+.bottom-box {
   padding-top: 40rpx;
   box-sizing: border-box;
   position: relative;
 }
 
-.bottom-box .now-position{
+.bottom-box .now-position {
   border-bottom: 0 none;
   padding-bottom: 34rpx;
 }
 
-.chat{
+.chat {
   width: 320rpx;
   height: 76rpx;
   background-repeat: no-repeat;
@@ -191,23 +193,20 @@ width: 120rpx;
   line-height: 76rpx;
 }
 
-icon{
+icon {
   transform: translateY(10rpx);
   margin-left: 6rpx;
 }
 
-.aim{
-  width: 94rpx;
-  height: 94rpx;
+.aim {
+  width: 50rpx;
+  height: 50rpx;
+  background-color: #fff;
+  padding: 10rpx;
+  border-radius: 50%;
 }
 
-.aim-box{
-  position: absolute;
-  right: 13rpx;
-  top: -92rpx;
-}
-
-.enlargemen-and-reduction-box{
+.enlargemen-and-reduction-box {
   width: 90rpx;
   height: 90rpx;
   border-radius: 50%;
@@ -215,36 +214,35 @@ icon{
   border: 1px solid #dde1e4;
   position: absolute;
   right: 13rpx;
-  top:-462rpx;
+  top: -462rpx;
   background: #fff;
   font-weight: bold;
   display: flex;
   flex-direction: column;
   padding-top: 10rpx;
   box-sizing: border-box;
-  box-shadow:  0 0 1px rgba(0, 0, 0, 0.1)
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
 }
 
-.oprate{
+.oprate {
   align-self: center;
   line-height: 36rpx;
 }
 
-.add{
+.add {
   font-size: 22pt;
 }
 
-
-.path-of-car{
+.path-of-car {
   width: 62rpx;
   height: 116rpx;
   position: absolute;
   top: -500rpx;
   left: 200rpx;
-  transform:rotate(18deg);
+  transform: rotate(18deg);
 }
 
-.get-on-the-car-img{
+.get-on-the-car-img {
   width: 204rpx;
   height: 90rpx;
   position: absolute;
@@ -258,36 +256,38 @@ icon{
   justify-content: center;
 }
 
-.time-wait{
+.time-wait {
   color: #fe7201;
   padding-right: 6rpx;
 }
-.sug_info{
-   display: flex;
+
+.sug_info {
+  display: flex;
   flex-direction: column;
 }
-.yuzhong{
+
+.yuzhong {
   height: 30rpx;
-  border: red
+  border: red;
 }
 
-.place-address{
+.place-address {
   color: #92929a;
   font-size: 25rpx;
   border-bottom: 1px solid #f5f5f7;
 }
 
-.mymessage{
+.mymessage {
   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0,0.3);
+  background: rgba(0, 0, 0, 0.3);
   z-index: 13;
 }
 
-.phonumber{
+.phonumber {
   position: absolute;
   top: 0;
   left: 0;
@@ -297,54 +297,55 @@ icon{
   z-index: 11;
 }
 
-.nickname{
+.nickname {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.headportrait{
+.headportrait {
   width: 180rpx;
   height: 180rpx;
 }
 
-.mycall{
+.mycall {
   padding-top: 20rpx;
   padding-bottom: 20rpx;
 }
 
-.petname{
+.petname {
   font-size: 10pt;
   color: #888;
 }
 
-.bottom-box1{
+.bottom-box1 {
   padding-top: 66rpx;
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
 }
-.operation-list{
-   display: flex;
+
+.operation-list {
+  display: flex;
   flex-direction: column;
-  padding-left: 40rpx
+  padding-left: 40rpx;
 }
 
-.travel-itinerary{
+.travel-itinerary {
   width: 42rpx;
   height: 42rpx;
   margin-right: 25rpx;
 }
 
-.travel-text{
+.travel-text {
   font-size: 13pt;
 }
 
-.row-box{
-  display:flex; 
-  align-items:center;
-  margin-bottom:50rpx;
+.row-box {
+  display: flex;
+  align-items: center;
+  margin-bottom: 50rpx;
 }
 
 /* #map{
@@ -358,9 +359,6 @@ icon{
   z-index: 3;
 } */
 
-
-
-
 .content {
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
   border-radius: 3px;
@@ -373,7 +371,8 @@ icon{
   position: relative;
   margin-bottom: 20rpx;
 }
-.content-pool{
+
+.content-pool {
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
   border-radius: 3px;
   background: #fff;
@@ -385,12 +384,12 @@ icon{
   flex-direction: column;
   position: relative;
 }
+
 .remove-address {
   display: flex;
   flex-direction: row-reverse;
   padding-right: 75rpx;
 }
-
 
 .count-money {
   padding-top: 15rpx;
@@ -493,14 +492,11 @@ icon {
   margin-left: 6rpx;
 }
 
-.aim {
-  width: 94rpx;
-  height: 94rpx;
-}
-
 .aim-box {
+  width: 120rpx;
+  height: 120rpx;
   position: absolute;
-  right: 13rpx;
+  right: -50rpx;
   top: -92rpx;
 }
 
@@ -668,22 +664,16 @@ icon {
   padding-right: 15rpx;
 }
 
-.aim {
-  width: 44rpx;
-  height: 44rpx;
-  padding-right: 15rpx;
-  position: fixed;
-  left: 36rpx;
-}
-
 .title-text {
   font-size: 13pt;
   color: #acacac;
 }
-.remark-text{
+
+.remark-text {
   font-size: 12pt;
   color: #acacac;
 }
+
 .history-city {
   font-weight: 600;
   font-size: 12pt;
@@ -747,6 +737,19 @@ icon {
   padding-top: 10rpx;
   color: #acacac;
 }
+
+.aim-from-img {
+  width: 120rpx;
+  height: 120rpx;
+  position: absolute;
+  right: 39%;
+  top: 34%;
+}
+.from-img{
+  width: 70rpx;
+  height: 100rpx;
+}
+
 .bottom-box-remark {
   display: flex;
   flex-direction: row;
@@ -756,6 +759,7 @@ icon {
   padding-top: 30rpx;
   padding-bottom: 30rpx;
 }
+
 /*隐藏滚动条*/
 
 ::-webkit-scrollbar {

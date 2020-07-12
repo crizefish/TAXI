@@ -1,6 +1,6 @@
 const app = getApp()
-var bmap = require('../../libs/bmap-wx.min.js');
 var netWork = require('../../utils/netWork.js')
+var amapFile = require('../../libs/amap-wx.js');
 var wxMarkerData = [];
 var timer; // 计时器
 Page({
@@ -26,7 +26,9 @@ Page({
     pathOfCar: app.globalData.GlobalIMG + 'alc@2x.png', // 轿车
     nowPosition: app.globalData.GlobalIMG + 'sy_dingwei@2x.png', // 方向
     getOnTheCar: app.globalData.GlobalIMG + 'sy_tixing@2x.png',
-    phone: app.globalData.GlobalIMG + 'sy_jiejia_diahua@2x.png'
+    phone: app.globalData.GlobalIMG + 'sy_jiejia_diahua@2x.png',
+    latitude: '',
+    longitude: '',
 
   },
 
@@ -35,33 +37,8 @@ Page({
    */
   onLoad: function(options) {
     var that = this;
-    var BMap = new bmap.BMapWX({
-      ak: '9nxZMWueKmnnnGgrt6Ie7fR3EdjYTD6N'
-    });
-    var fail = function(data) {
-      console.log(data)
-    };
-    var success = function(data) {
-      wxMarkerData = data.wxMarkerData;
-      console.log(data.wxMarkerData)
-      that.setData({
-        markers: wxMarkerData
-      });
-      that.setData({
-        latitude: wxMarkerData[0].latitude,
-        longitude: wxMarkerData[0].longitude,
-        address: wxMarkerData[0].address,
-        desc: wxMarkerData[0].desc
-      });
-    }
-    BMap.regeocoding({
-      fail: fail,
-      success: success,
-      // iconPath: '../../img/marker_red.png',
-      // iconTapPath: '../../img/marker_red.png'
-    });
-
     // 倒计时
+    that.regeocoding();
     function Countdown() {
       //每过一秒请求一次接口
       timer = setTimeout(function() {
@@ -74,9 +51,8 @@ Page({
               var orderStatus = res.data.result.order.order_status;
               //  -3 超时取消 -2 司机取消 -1 用户取消  0 发单 1 已抢单 2 到达乘客地点 3 接到乘客  4 到达目的地  5 发起收款  6 已确认付款
               if (orderStatus == 5) {
-
                 wx.navigateTo({
-                  url: "/pages/paythefare/paythefare"
+                  url: "/pages/paythefare/paythefare?carType=kc"
                 })
                 clearTimeout(timer)
               }
@@ -99,7 +75,7 @@ Page({
           })
         })
         Countdown();
-      }, 1000);
+      }, 2000);
     };
 
     Countdown();
@@ -199,6 +175,66 @@ Page({
       }
     })
   },
+  regeocoding: function () {
+    var that = this;
+    var myAmapFun = new amapFile.AMapWX({
+      key: app.globalData.MapKey,
+    });
+    myAmapFun.getRegeo({
+      success: function (data) {
+
+
+        var city = data[0].regeocodeData.addressComponent.city;
+        var province = data[0].regeocodeData.addressComponent.province;
+        that.setData({
+          latitude: data[0].latitude,
+          longitude: data[0].longitude,
+          address: data[0].name,
+          desc: data[0].desc,
+          adcode: data[0].regeocodeData.addressComponent.adcode,
+          city: city == '' ? province : city,
+          // markers: [{
+          //   id: 0,
+          //   longitude: data[0].longitude,
+          //   latitude: data[0].latitude,
+          //   title: data[0].desc,
+          //   iconPath: ''
+          // }]
+        });
+
+        var from_location_gd = that.data.longitude + "," + that.data.latitude;
+        var from_location = that.data.latitude + "," + that.data.longitude;
+        var from_address = that.data.desc + "|||" + that.data.address;
+        wx.setStorage({
+          key: "from_location",
+          data: from_location
+        });
+        wx.setStorage({
+          key: "from_address",
+          data: from_address
+        });
+        // wx.setStorage({
+        //   key: "from_location",
+        //   data: "31.19863667538746,121.60027899370256"
+        // });
+        //  wx.setStorage({
+        //   key: "from_address",
+        //   data: "上海浦东软件园祖冲之园-X座西南198米|||上海市浦东新区X620(金科路)"
+        // });
+
+        wx.setStorage({
+          key: "from_location_gd",
+          data: from_location_gd
+        });
+
+      },
+      fail: function (info) {
+        //失败回调
+        console.log(info)
+      }
+    });
+  },
+
 })
 
 function alertInfo(msg) {

@@ -1,0 +1,21 @@
+ <view class='title'>
+
+    <input type='text' placeholder='你从哪儿下车' bindinput='bindKeyInput' auto-focus='true' style='font-size:11pt'></input>
+  <text class='cancel-text' bindtap='toIndex'>取消</text>
+  </view>
+
+<scroll-view class='page-body' scroll-y="true" >
+ 
+ <view class='content-history' bindtap='choiceTarget' wx:for='{{allResult}}' wx:key="id"  data-index="{{index}}">
+          <view class='input-box' style= 'width: 80%'>
+            <view class='top-box-history'>
+              <view class='circle green-circle'></view>
+              <text class='history-detail'>{{item.from_city}}</text>
+              <view class='line-split-line'></view>
+              <text class='history-detail'>{{item.from_address}}</text>
+            </view>
+          </view>
+        
+        </view>
+
+</scroll-view>
